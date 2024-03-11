@@ -9,9 +9,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = Team.TABLE_NAME)
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Team {
     
     public static final String TABLE_NAME = "Team";
