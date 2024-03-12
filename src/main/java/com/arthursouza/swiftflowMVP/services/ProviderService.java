@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arthursouza.swiftflowMVP.models.Provider;
+import com.arthursouza.swiftflowMVP.models.dto.ProviderDTO.ProviderCreateDTO;
+import com.arthursouza.swiftflowMVP.models.dto.ProviderDTO.ProviderUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.ProviderRepository;
+
+import jakarta.validation.Valid;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,8 +62,34 @@ public class ProviderService {
             throw new RuntimeException("It's not possible to delete this provider. There are related entities");
         }
 
-
-
     }
+
+
+    public Provider fromDTO(@Valid ProviderCreateDTO obj){
+
+        Provider provider = new Provider();
+
+        provider.setDelivery(obj.getDelivery());
+        provider.setMinimum(obj.getMinimum());
+        provider.setName(obj.getName());
+
+        return provider;
+    }
+
+    public Provider fromDTO(@Valid ProviderUpdateDTO obj){
+
+        Provider provider = new Provider();
+
+        provider.setId(obj.getId());
+        provider.setDelivery(obj.getDelivery());
+        provider.setMinimum(obj.getMinimum());
+        provider.setName(obj.getName());
+
+        return provider;
+    }
+
+
+    
+
 
 }

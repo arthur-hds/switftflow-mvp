@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arthursouza.swiftflowMVP.models.Client;
+import com.arthursouza.swiftflowMVP.models.dto.ClientDTO.ClientCreateDTO;
+import com.arthursouza.swiftflowMVP.models.dto.ClientDTO.ClientUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.ClientRepository;
+
+import jakarta.validation.Valid;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,5 +64,32 @@ public class ClientService {
         }
         
     }
+
+
+
+    public Client fromDTO(@Valid ClientCreateDTO obj){
+        Client client = new Client();
+
+        client.setName(obj.getName());
+        client.setNumber(obj.getNumber());
+        client.setType(obj.getType());
+
+        return client;
+    }
+
+
+    public Client fromDTO(@Valid ClientUpdateDTO obj){
+        Client client = new Client();
+
+        client.setId(obj.getId());
+        client.setName(obj.getName());
+        client.setNumber(obj.getNumber());
+        client.setType(obj.getType());
+
+        return client;
+
+
+    }
+
 
 }

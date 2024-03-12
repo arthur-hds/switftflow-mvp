@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arthursouza.swiftflowMVP.models.Shirt;
+import com.arthursouza.swiftflowMVP.models.dto.ShirtDTO.ShirtCreateDTO;
+import com.arthursouza.swiftflowMVP.models.dto.ShirtDTO.ShirtUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.ShirtRepository;
+
+import jakarta.validation.Valid;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,4 +67,27 @@ public class ShirtService {
 
 
     }
+
+
+
+    public Shirt fromDTO(@Valid ShirtCreateDTO obj){
+        Shirt shirt = new Shirt();
+        shirt.setSeason(obj.getSeason());
+        shirt.setTeam_id(obj.getTeam_id());
+        shirt.setType(obj.getType());
+
+        return shirt;
+    }
+
+
+    public Shirt fromDTO(@Valid ShirtUpdateDTO obj){
+        Shirt shirt = new Shirt();
+        shirt.setId(obj.getId());
+        shirt.setSeason(obj.getSeason());
+        shirt.setType(obj.getType());
+
+        return shirt;
+    }
+
+
 }
