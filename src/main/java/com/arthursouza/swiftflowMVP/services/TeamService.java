@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.arthursouza.swiftflowMVP.models.Team;
+import com.arthursouza.swiftflowMVP.models.dto.TeamDTO.TeamCreateDTO;
+import com.arthursouza.swiftflowMVP.models.dto.TeamDTO.TeamUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.TeamRepository;
 
 @Service
@@ -60,6 +62,28 @@ public class TeamService {
             throw new RuntimeException("It's not possible to delete this team. There are related entities");
 
         }
+
+    }
+
+
+    public Team fromDTO(TeamCreateDTO obj){
+
+        Team team = new Team();
+        team.setName(obj.getName());
+        team.setSponsor(obj.getSponsor());
+        team.setSport(obj.getSport());
+
+        return team;
+
+    }
+
+    public Team fromDTO(TeamUpdateDTO obj){
+        Team team = new Team();
+        team.setId(obj.getId());;
+        team.setSponsor(obj.getSponsor());
+        team.setSport(obj.getSport());
+
+        return team;
 
 
     }

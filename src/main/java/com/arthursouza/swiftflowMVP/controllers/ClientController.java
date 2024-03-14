@@ -43,6 +43,7 @@ public class ClientController {
     //CRUD METHODS
 
     @PostMapping
+    @Validated
     public ResponseEntity<Void> create(@Valid @RequestBody ClientCreateDTO obj){
         Client client = this.clientService.fromDTO(obj);
 
@@ -57,6 +58,7 @@ public class ClientController {
 
 
     @PutMapping("/{id}")
+    @Validated
     public ResponseEntity<Void> udpate(@Valid @RequestBody ClientUpdateDTO obj, @PathVariable Long id){
         Client client = this.clientService.fromDTO(obj);
 

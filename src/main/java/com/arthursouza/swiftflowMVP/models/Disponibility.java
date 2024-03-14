@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,12 +41,12 @@ public class Disponibility {
 
     @Column(name = "price", nullable = false, length = 5)
     @Size(min = 2, max = 5)
-    @NotBlank
+    @NotNull
     private Double price;
 
     @Column(name = "sale", nullable = false, length = 5)
     @Size(min = 2, max = 5)
-    @NotBlank
+    @NotNull
     private Double sale;
 
 

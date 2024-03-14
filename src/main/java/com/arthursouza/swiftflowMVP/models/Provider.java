@@ -6,7 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,9 +43,9 @@ public class Provider {
     private String delivery;
 
 
-    @Column(name = "minimum", nullable = false, length = 3)
-    @Size(min = 1, max = 3)
-    @NotBlank
+    @Column(name = "minimum", nullable = false)
+    @Min(value = 1, message = "Minimum value must be higher or equal than 1")
+    @NotNull
     private Integer minimum;
 
 
