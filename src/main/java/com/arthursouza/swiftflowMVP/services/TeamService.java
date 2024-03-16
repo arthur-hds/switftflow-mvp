@@ -11,6 +11,8 @@ import com.arthursouza.swiftflowMVP.models.dto.TeamDTO.TeamCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.TeamDTO.TeamUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.TeamRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TeamService {
     
@@ -66,7 +68,7 @@ public class TeamService {
     }
 
 
-    public Team fromDTO(TeamCreateDTO obj){
+    public Team fromDTO(@Valid TeamCreateDTO obj){
 
         Team team = new Team();
         team.setName(obj.getName());
@@ -77,11 +79,12 @@ public class TeamService {
 
     }
 
-    public Team fromDTO(TeamUpdateDTO obj){
+    public Team fromDTO(@Valid TeamUpdateDTO obj,@Valid Long id){
         Team team = new Team();
         team.setId(obj.getId());;
         team.setSponsor(obj.getSponsor());
         team.setSport(obj.getSport());
+        team.setName(findbyId(id).getName());
 
         return team;
 

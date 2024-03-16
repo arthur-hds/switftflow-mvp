@@ -41,7 +41,7 @@ public class TeamController {
     //CRUD METHODS
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid TeamCreateDTO obj){
+    public ResponseEntity<Void> create(@Valid @RequestBody TeamCreateDTO obj){
         Team team = this.teamService.fromDTO(obj);
 
         this.teamService.create(team);
@@ -56,7 +56,7 @@ public class TeamController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody TeamUpdateDTO obj, @PathVariable Long id){
-        Team team = this.teamService.fromDTO(obj);
+        Team team = this.teamService.fromDTO(obj, id);
         team.setId(id);
 
         this.teamService.update(team);

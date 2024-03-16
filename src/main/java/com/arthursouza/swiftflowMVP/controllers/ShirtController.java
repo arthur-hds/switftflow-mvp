@@ -39,7 +39,7 @@ public class ShirtController {
 
     
     //CRUD METHODS
-    //! Invalid creation method. ERROR on null parameters
+    
     @PostMapping
     @Validated
     public ResponseEntity<Void> create(@Valid @RequestBody ShirtCreateDTO obj){
@@ -53,10 +53,11 @@ public class ShirtController {
 
     }
 
+    //! Invalid update method. ERROR on null parameters
     @PutMapping("/{id}")
     @Validated
     public ResponseEntity<Void> update(@Valid @RequestBody ShirtUpdateDTO obj, @PathVariable Long id){
-        Shirt shirt = this.shirtService.fromDTO(obj);
+        Shirt shirt = this.shirtService.fromDTO(obj, id);
         shirt.setId(id);
 
         this.shirtService.update(shirt);

@@ -80,11 +80,12 @@ public class ShirtService {
     }
 
 
-    public Shirt fromDTO(@Valid ShirtUpdateDTO obj){
+    public Shirt fromDTO(@Valid ShirtUpdateDTO obj,@Valid Long id){
         Shirt shirt = new Shirt();
         shirt.setId(obj.getId());
         shirt.setSeason(obj.getSeason());
         shirt.setType(obj.getType());
+        shirt.setTeam_id(findbyId(id).getTeam_id());
 
         return shirt;
     }
