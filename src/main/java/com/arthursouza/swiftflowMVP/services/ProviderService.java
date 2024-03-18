@@ -9,6 +9,8 @@ import com.arthursouza.swiftflowMVP.models.Provider;
 import com.arthursouza.swiftflowMVP.models.dto.ProviderDTO.ProviderCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.ProviderDTO.ProviderUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.ProviderRepository;
+import com.arthursouza.swiftflowMVP.services.exceptions.DataBindingViolationException;
+import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -25,7 +27,7 @@ public class ProviderService {
     public Provider findById(Long id){
         Optional<Provider> provider = this.providerRepository.findById(id);
 
-        return provider.orElseThrow(() -> new RuntimeException(
+        return provider.orElseThrow(() -> new ObjectNotFoundException(
             "This ID doesn't match any provider. Id: " + id + " Type: "+ Provider.class.getName()));
     }
 
@@ -59,7 +61,7 @@ public class ProviderService {
         try {
             this.providerRepository.delete(obj);
         } catch (Exception e) {
-            throw new RuntimeException("It's not possible to delete this provider. There are related entities");
+            throw new DataBindingViolationException("It's not possible to delete this provider. There are related entities");
         }
 
     }

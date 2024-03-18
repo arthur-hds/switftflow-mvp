@@ -10,6 +10,8 @@ import com.arthursouza.swiftflowMVP.models.Team;
 import com.arthursouza.swiftflowMVP.models.dto.TeamDTO.TeamCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.TeamDTO.TeamUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.TeamRepository;
+import com.arthursouza.swiftflowMVP.services.exceptions.DataBindingViolationException;
+import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -24,7 +26,7 @@ public class TeamService {
     public Team findbyId(Long id){
         Optional<Team> team = this.teamRepository.findById(id);
 
-        return team.orElseThrow(() -> new RuntimeException(
+        return team.orElseThrow(() -> new ObjectNotFoundException(
             "This ID doesn't match any team. Id: " + id + " Type: "+ Team.class.getName()));
     
     }
@@ -61,7 +63,7 @@ public class TeamService {
         try {
             this.teamRepository.delete(obj);
         } catch (Exception e) {
-            throw new RuntimeException("It's not possible to delete this team. There are related entities");
+            throw new DataBindingViolationException("It's not possible to delete this team. There are related entities");
 
         }
 

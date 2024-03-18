@@ -9,6 +9,8 @@ import com.arthursouza.swiftflowMVP.models.Shirt;
 import com.arthursouza.swiftflowMVP.models.dto.ShirtDTO.ShirtCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.ShirtDTO.ShirtUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.ShirtRepository;
+import com.arthursouza.swiftflowMVP.services.exceptions.DataBindingViolationException;
+import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -24,7 +26,7 @@ public class ShirtService {
     public Shirt findbyId(Long id){
         Optional<Shirt> shirt = this.shirtRepository.findById(id);
 
-        return shirt.orElseThrow(() -> new RuntimeException(
+        return shirt.orElseThrow(() -> new ObjectNotFoundException(
             "This ID doesn't match any shirt. Id: " + id + " Type: "+ Shirt.class.getName()));
 
     }
@@ -62,7 +64,7 @@ public class ShirtService {
         try {
             this.shirtRepository.delete(obj);
         } catch (Exception e) {
-            throw new RuntimeException("It's not possible to delete this client. There are related entities");
+            throw new DataBindingViolationException("It's not possible to delete this client. There are related entities");
         }
 
 

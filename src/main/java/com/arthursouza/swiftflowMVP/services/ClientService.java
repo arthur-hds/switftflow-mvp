@@ -9,6 +9,7 @@ import com.arthursouza.swiftflowMVP.models.Client;
 import com.arthursouza.swiftflowMVP.models.dto.ClientDTO.ClientCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.ClientDTO.ClientUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.ClientRepository;
+import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -25,7 +26,7 @@ public class ClientService {
     public Client findById(Long id){
         Optional<Client> client = this.clientRepository.findById(id);
 
-        return client.orElseThrow(() -> new RuntimeException(
+        return client.orElseThrow(() -> new ObjectNotFoundException(
             "This ID doesn't match any client. Id: " + id + " Type: "+ Client.class.getName()));
     }
 
