@@ -9,6 +9,7 @@ import com.arthursouza.swiftflowMVP.models.Client;
 import com.arthursouza.swiftflowMVP.models.dto.ClientDTO.ClientCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.ClientDTO.ClientUpdateDTO;
 import com.arthursouza.swiftflowMVP.repositories.ClientRepository;
+import com.arthursouza.swiftflowMVP.services.exceptions.DataBindingViolationException;
 import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
 
 import jakarta.validation.Valid;
@@ -61,7 +62,7 @@ public class ClientService {
         try{
             this.clientRepository.delete(newClient);;
         }catch(Exception ex){
-            throw new RuntimeException("It's not possible to delete this client. There are related entities");
+            throw new DataBindingViolationException("It's not possible to delete this client. There are related entities");
         }
         
     }
