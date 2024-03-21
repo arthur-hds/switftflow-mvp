@@ -1,6 +1,7 @@
 package com.arthursouza.swiftflowMVP.controllers;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,13 @@ public class ProviderController {
 
         return ResponseEntity.ok().body(obj);
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Provider>> findAllProviders(){
+        List<Provider> providers = this.providerService.findAllProviders();
+
+        return ResponseEntity.ok().body(providers);
     }
 
     

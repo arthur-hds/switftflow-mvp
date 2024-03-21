@@ -1,6 +1,8 @@
 package com.arthursouza.swiftflowMVP.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,12 @@ public class ClientService {
             "This ID doesn't match any client. Id: " + id + " Type: "+ Client.class.getName()));
     }
 
+
+    public List<Client> findAllClients(){
+        List<Client> clients = this.clientRepository.findAllClients();
+        return clients;
+
+    }
 
 
     //CRUD METHODS

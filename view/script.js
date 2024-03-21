@@ -1,21 +1,24 @@
-const url = "http://localhost:8080/client/5"
-
 function show(data){
 
     let tab =
-    `<thead>
-        <th scope="col">#</th>
-        <th scope="col">Description</th>
-    </thead>
+    `<thead>`;
 
-    <tr>
-        <td scope="row">${data?.id ? data.id : "Inexistente"}</td>
-        <td>${data?.name ? data.name : "Inexistente"}</td>
-    </tr>
-    
+    for (let column in data[0]){
+
+        tab += `
+        <th scope="col">${column}</th>
+        `
+    }
+
+    tab += 
     `
-    
-    ;
+        </thead>
+    `;
+
+
+    for(let j; j< data[0].length; j++){
+        console.log(j);
+    }
 
 
     document.getElementById("table").innerHTML = tab;
@@ -30,12 +33,54 @@ async function getAPI(url){
 
     const data = await response.json();
 
-    console.log(data);
-
     show(data);
 }
-   
-getAPI(url);
+
+
+function ChangeData(path){
+
+    const url = "http://localhost:8080/" + path;
+
+    getAPI (url);
+
+}
+
+
+let clientButton = document.getElementById("client");
+let shirtsButton = document.getElementById("shirt");
+let ProvidersButton = document.getElementById("provider");
+let OrderButton = document.getElementById("order");
+
+
+clientButton.addEventListener("click", function(){
+    let name = clientButton.id;
+    document.getElementById("tittle").innerHTML = name.toUpperCase();
+    ChangeData(name);
+
+}, false);
+
+shirtsButton.addEventListener("click", function(){
+    let name = shirtsButton.id;
+    document.getElementById("tittle").innerHTML = name.toUpperCase();
+    ChangeData(name);
+
+}, false);
+
+ProvidersButton.addEventListener("click", function(){
+    let name = ProvidersButton.id;
+    document.getElementById("tittle").innerHTML = name.toUpperCase();
+    ChangeData(name);
+
+}, false);
+
+OrderButton.addEventListener("click", function(){
+    let name = OrderButton.id;
+    document.getElementById("tittle").innerHTML = name.toUpperCase();
+    ChangeData(name);
+
+}, false);
+
+
 
 
 

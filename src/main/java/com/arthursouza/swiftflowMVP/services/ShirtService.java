@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ public class ShirtService {
 
         return shirt.orElseThrow(() -> new ObjectNotFoundException(
             "This ID doesn't match any shirt. Id: " + id + " Type: "+ Shirt.class.getName()));
+
+    }
+
+    public List<Shirt> findAllShirts(){
+        List<Shirt> shirts = this.shirtRepository.findAllShirts();
+
+        return shirts;
 
     }
 

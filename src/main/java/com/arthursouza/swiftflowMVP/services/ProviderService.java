@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,14 @@ public class ProviderService {
 
         return provider.orElseThrow(() -> new ObjectNotFoundException(
             "This ID doesn't match any provider. Id: " + id + " Type: "+ Provider.class.getName()));
+    }
+
+
+    public List<Provider> findAllProviders(){
+        List<Provider> providers = this.providerRepository.findAllProviders();
+
+        return providers;
+
     }
 
     //CRUD METHODS

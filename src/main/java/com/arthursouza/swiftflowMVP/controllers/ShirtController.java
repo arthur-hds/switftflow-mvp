@@ -1,6 +1,7 @@
 package com.arthursouza.swiftflowMVP.controllers;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,15 @@ public class ShirtController {
 
         return ResponseEntity.ok().body(shirt);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Shirt>> findAllShirts(){
+        List<Shirt> shirts = this.shirtService.findAllShirts();
+
+        return ResponseEntity.ok().body(shirts);
+
+    }
+
 
     
     //CRUD METHODS

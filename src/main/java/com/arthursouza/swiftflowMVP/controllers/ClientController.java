@@ -1,6 +1,7 @@
 package com.arthursouza.swiftflowMVP.controllers;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,16 @@ public class ClientController {
 
         return ResponseEntity.ok().body(obj);        
     }
+
+
+    @GetMapping
+    public ResponseEntity<List<Client>> findAllClients(){
+        List<Client> clients = this.clientService.findAllClients();
+
+        return ResponseEntity.ok().body(clients);
+
+    }
+
 
     //CRUD METHODS
 

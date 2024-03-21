@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
  
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 
     <style>
         body{
@@ -48,7 +48,7 @@
 
         .headers-buttons-div h1{
             padding-left: 24px;
-          
+            cursor: pointer;
         }
 
         .headers-logo-div{
@@ -103,10 +103,10 @@
         </div>
         
         <div class="headers-buttons-div">
-            <h1>Clients</h1>
-            <h1>Shirts</h1>
-            <h1>Providers</h1>
-            <h1>Order</h1>
+            <h1 id="client">Clients</h1>
+            <h1 id="shirt">Shirts</h1>
+            <h1 id="provider">Providers</h1>
+            <h1 id="order">Order</h1>
         </div>
 
     </div>
@@ -119,7 +119,7 @@
             
             <div class="d-flex">
 
-                <p class="h1 text-center flex-grow-1">Clients</p>
+                <p class="h1 text-center flex-grow-1" id="tittle">Clients</p>
                 
             </div>
 
