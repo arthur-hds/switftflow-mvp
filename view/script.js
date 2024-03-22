@@ -16,8 +16,33 @@ function show(data){
     `;
 
 
-    for(let j; j< data[0].length; j++){
-        console.log(j);
+    for(let j = 0; j< Object.values(data).length; j++){
+
+        tab += `
+            <tr>`;
+
+        for(let column in data[0]){
+
+            let value = data[j];
+            
+
+            if(typeof value[column] === "object"){
+                
+                tab+= `<td scope="row"> ${value[column].id} - ${value[column].name}</td>`
+
+            }else{
+
+                tab+= `<td scope="row"> ${value[column]} </td>`;
+            
+            }
+
+           
+           
+        }
+
+        tab +=`  
+            </tr>
+        `;
     }
 
 
@@ -33,6 +58,8 @@ async function getAPI(url){
 
     const data = await response.json();
 
+    console.log(Object.values(data).length);
+    
     show(data);
 }
 
