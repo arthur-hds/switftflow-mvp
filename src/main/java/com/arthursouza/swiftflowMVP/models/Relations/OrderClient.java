@@ -1,4 +1,7 @@
-package com.arthursouza.swiftflowMVP.models;
+package com.arthursouza.swiftflowMVP.models.Relations;
+
+import com.arthursouza.swiftflowMVP.models.Client;
+import com.arthursouza.swiftflowMVP.models.Shirt;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,13 +47,11 @@ public class OrderClient {
     private String size;
 
     @Column(name = "additional", nullable = true, length = 5)
-    @Size(min = 1, max = 5)
-    @NotBlank
+    @NotNull
     private Double additional;
     
     @Column(name = "discount", nullable = true, length = 5)
-    @Size(min = 1, max = 5)
-    @NotBlank
+    @NotNull
     private Double discount;
 
 
