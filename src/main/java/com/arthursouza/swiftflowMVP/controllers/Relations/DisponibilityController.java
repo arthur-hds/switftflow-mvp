@@ -53,7 +53,7 @@ public class DisponibilityController {
     
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody DisponibilityUpdateDTO obj, @Valid @PathVariable Long id){
-        Disponibility disponibility = this.disponibilityService.fromDTO(obj);
+        Disponibility disponibility = this.disponibilityService.fromDTO(obj, id);
 
         disponibility.setId(id);
         this.disponibilityService.update(disponibility);

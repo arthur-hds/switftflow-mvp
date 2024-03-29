@@ -90,6 +90,7 @@ public class OrderClientService {
         orderClient.setAdditional(obj.getAdditional());
         orderClient.setDiscount(obj.getDiscount());
         orderClient.setShirt_id(obj.getShirt_id());
+        orderClient.setClient_id(findById(id).getClient_id());
         orderClient.setSize(obj.getSize());
 
         return orderClient;

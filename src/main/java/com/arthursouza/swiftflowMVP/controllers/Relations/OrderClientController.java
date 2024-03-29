@@ -56,7 +56,7 @@ public class OrderClientController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody OrderClientUpdateDTO obj, @Valid @PathVariable Long id){
-        OrderClient orderClient = this.orderClientService.fromDTO(obj);
+        OrderClient orderClient = this.orderClientService.fromDTO(obj, id);
 
         orderClient.setId(id);
         this.orderClientService.update(orderClient);
@@ -64,7 +64,7 @@ public class OrderClientController {
         return ResponseEntity.noContent().build();
     }
 
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@Valid @PathVariable Long id){
         this.orderClientService.delete(id);

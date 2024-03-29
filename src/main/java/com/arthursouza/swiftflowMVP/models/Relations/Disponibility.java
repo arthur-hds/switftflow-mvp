@@ -42,12 +42,10 @@ public class Disponibility {
     private Shirt shirt_id;
 
     @Column(name = "price", nullable = false, length = 5)
-    @Size(min = 2, max = 5)
     @NotNull
     private Double price;
 
     @Column(name = "sale", nullable = false, length = 5)
-    @Size(min = 2, max = 5)
     @NotNull
     private Double sale;
 

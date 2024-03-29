@@ -70,7 +70,7 @@ public class DisponibilityService {
     }
 
 
-    public Disponibility fromDTO(DisponibilityCreateDTO obj){
+    public Disponibility fromDTO(@Valid DisponibilityCreateDTO obj){
         Disponibility disponibility = new Disponibility();
 
         disponibility.setPrice(obj.getPrice());
@@ -83,12 +83,13 @@ public class DisponibilityService {
     }
 
 
-    public Disponibility fromDTO(DisponibilityUpdateDTO obj){
+    public Disponibility fromDTO(@Valid DisponibilityUpdateDTO obj, @Valid Long id){
         Disponibility disponibility = new Disponibility();
 
         disponibility.setId(obj.getId());
         disponibility.setPrice(obj.getPrice());
         disponibility.setSale(obj.getSale());
+        disponibility.setProvider_id(findById(id).getProvider_id());
         disponibility.setShirt_id(obj.getShirt_id());
 
         return disponibility;
