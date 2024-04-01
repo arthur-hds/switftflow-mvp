@@ -111,3 +111,40 @@ OrderButton.addEventListener("click", function(){
 
 
 
+//CREATE BUTTON
+
+const modal = document.getElementById("add-modal");
+
+const btn = document.getElementById("btn-add");
+
+const btnClose = document.getElementById("btn-close")
+
+function showModal(){
+    if(modal.style.display === ""){
+
+        modal.style.display = "block";
+
+    }else if(modal.style.display === "block"){
+
+        modal.style.display = "";
+
+    }
+}
+    
+    
+
+btn.addEventListener("click", showModal);
+btnClose.addEventListener("click", showModal);
+
+
+
+
+
+
+
+
+
+
+
+
+
