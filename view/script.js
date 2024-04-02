@@ -36,15 +36,12 @@ function show(data){
             
             }
 
-           
-           
         }
 
         tab +=`  
             </tr>
         `;
     }
-
 
     document.getElementById("table").innerHTML = tab;
 
@@ -53,22 +50,33 @@ function show(data){
 
 
 async function getAPI(url){
+
     const response = await fetch(url, {
         method: "GET"});
 
+    
     const data = await response.json();
-
+    
     console.log(Object.values(data).length);
     
-    show(data);
+    return data;
 }
 
 
-function ChangeData(path){
+async function ChangeData(path){
+
+    
 
     const url = "http://localhost:8080/" + path;
 
-    getAPI (url);
+    let data = await getAPI(url);
+
+    console.log(data)
+
+    show(data)
+
+
+   
 
 }
 
@@ -83,6 +91,7 @@ clientButton.addEventListener("click", function(){
     let name = clientButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
+    ChangeModalData(name);
 
 }, false);
 
@@ -90,6 +99,7 @@ shirtsButton.addEventListener("click", function(){
     let name = shirtsButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
+    ChangeModalData(name);
 
 }, false);
 
@@ -97,6 +107,7 @@ ProvidersButton.addEventListener("click", function(){
     let name = ProvidersButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
+    ChangeModalData(name);
 
 }, false);
 
@@ -104,12 +115,13 @@ OrderButton.addEventListener("click", function(){
     let name = OrderButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
+    ChangeModalData(name);
 
 }, false);
 
 
 
-
+//--------------
 
 //CREATE BUTTON
 
@@ -130,11 +142,67 @@ function showModal(){
 
     }
 }
+
+
+//SET ALL THE LABELS
+function UpdateModal(columns){
+
+    const body = document.getElementById("modal-body");
+
+    let tab = ``
+
+
+    for(let j of columns){
+
+        tab += `
+        <label >${j}:</label>
+        <input type="text" name="" id="">
+        `
     
+    }
+
+    console.log(tab)
+    body.innerHTML = tab
+
+}
     
+
+//CHANGES THE TITTLE OF THE CURRENT FORM
+function ChangeModalData(path){
+    let column = path.toUpperCase();
+
+    const url = "http://localhost:8080/" + path;
+
+    let tittle = document.getElementById("tittle-modal");
+
+
+    switch(column){
+        case "CLIENT":
+            tittle.innerHTML = "CLIENT";
+            UpdateModal(["Name", "Type", "Number"])
+            break;
+        
+        case "SHIRT":
+            tittle.innerHTML = "SHIRT";
+            UpdateModal(["Team_id", "Type", "Season"])
+            break
+
+        case "PROVIDER":
+            tittle.innerHTML = "PROVIDER";
+            UpdateModal(["Name", "Delivery", "Minimum"])
+            break
+    }
+    
+
+
+}
+
 
 btn.addEventListener("click", showModal);
 btnClose.addEventListener("click", showModal);
+
+
+
 
 
 
