@@ -72,9 +72,11 @@ async function ChangeData(path){
     
     CurrentColumn = path;
   
-   
+  
+
     const url = "http://localhost:8080/"+ CurrentColumn;
     
+
     let data = await getAPI(url);
 
     
@@ -156,26 +158,70 @@ function showModal(){
 }
 
 
-//SET ALL THE LABELS
-function UpdateModal(columns){
+
+
+//SET ALL THE LABELS AND DOES SELECT TAG FOR FOREIGN COLUMNS
+async function UpdateModal(columns, path=null, handleForeignKey = false){
 
     const body = document.getElementById("modal-body");
+
+   
+    
 
     let tab = ``
 
 
-    for(let j of columns){
+    for(let i of columns){
 
-        tab += `
-        <label>${j}</label>
-        <input type="text" name="" id="">
-        `
+
+
+        if(i.includes("_id") && handleForeignKey){
+            console.log("FOUND IT")
+            console.log(path)
+            
+            try {
+                
+                const data = await getAPI(url+path);
+                console.log(data)
+
+                tab += `
+                <label class="modal-body-div-content-label-foreignkey">${i}</label>
+                `
+
+                for(let j of data){
+                    console.log(j)
+                    tab+=
+                    `
+                    <select>
+                        <option>${j.id + " - " + j.name} </option>
+                    </select>
+                    `
+
+                }
+
+            } catch (error) {
+                
+                console.error("URL isn't available or the wrong syntax is being returned: ", error)
+
+            }
+
+        }else{
+
+            tab += `
+            <label>${i}</label>
+            <input type="text" name="" id="">
+            `
+
+        }
+
+
+        
     
     }
 
 
 
-    body.innerHTML = tab
+    body.innerHTML = tab 
 
 
 }
@@ -185,7 +231,6 @@ function UpdateModal(columns){
 function ChangeModalData(path){
     let column = path.toUpperCase();
 
-    const url = "http://localhost:8080/" + path;
 
     let tittle = document.getElementById("tittle-modal");
 
@@ -198,7 +243,7 @@ function ChangeModalData(path){
         
         case "SHIRT":
             tittle.innerHTML = "SHIRT";
-            UpdateModal(["Team_id", "Type", "Season"])
+            UpdateModal(["Team_id", "Type", "Season"], "team", true)
             break
 
         case "PROVIDER":
@@ -221,27 +266,31 @@ function GetModalValues(){
 
     let div = document.getElementById("modal-body")
     let labels = div.querySelectorAll("label")
-    let values = div.querySelectorAll("input")
+    let values = div.querySelectorAll("input, select")
  
-    const formData = new FormData();
-    const formDataJSON = {};
+    const formDataJSON = {}; //JSON that will contain all the params
 
 
     for(let j = 0; j < labels.length; j++){
 
-        formData.append(labels[j].outerText.toLowerCase(), values[j].value);
-        
-    }
+        let key = labels[j].outerText.toLowerCase();
+        let value = values[j].value;
 
 
-    formData.forEach((value, key) => {
-        
+        //Condition that prepares the body in cases of Foreign Keys
+        if(labels[j].className === "modal-body-div-content-label-foreignkey"){
+
+            value = {"id": value.charAt(0)}
+           
+        }        
+
         formDataJSON[key] = value
 
-    })
 
+    
+    }
+    
 
-  
     return formDataJSON;
 
 }
@@ -255,11 +304,9 @@ async function CreateData(){
     
     const AllParams = GetModalValues();
     
-    console.log(AllParams)
-
-    console.log(url+CurrentColumn)
+    
     try {
-        const response = await fetch(url + CurrentColumn, { //SHOWING 400 ERROR 
+        const response = await fetch(url + CurrentColumn, { 
             method: "POST",
 
             headers: {
