@@ -256,15 +256,17 @@ async function CreateData(){
     const AllParams = GetModalValues();
     
     console.log(AllParams)
+
+    console.log(url+CurrentColumn)
     try {
-        const response = await fetch("http://localhost:8080/client", { //SHOWING 400 ERROR 
+        const response = await fetch(url + CurrentColumn, { //SHOWING 400 ERROR 
             method: "POST",
 
             headers: {
                 "Content-Type": "application/json"
             },
 
-            body: AllParams // JSON Body
+            body: JSON.stringify(AllParams) // JSON Body
         });
 
         if (!response.ok) {
