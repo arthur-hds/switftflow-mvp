@@ -1,3 +1,7 @@
+const url = "http://localhost:8080/"
+let CurrentColumn = ""
+
+
 function show(data){
 
     let tab =
@@ -66,12 +70,17 @@ async function getAPI(url){
 async function ChangeData(path){
 
     
-
-    const url = "http://localhost:8080/" + path;
-
+    CurrentColumn = path;
+  
+   
+    const url = "http://localhost:8080/"+ CurrentColumn;
+    
     let data = await getAPI(url);
 
-    console.log(data)
+    
+   
+
+    ChangeModalData(path)
 
     show(data)
 
@@ -91,7 +100,7 @@ clientButton.addEventListener("click", function(){
     let name = clientButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
-    ChangeModalData(name);
+
 
 }, false);
 
@@ -99,7 +108,7 @@ shirtsButton.addEventListener("click", function(){
     let name = shirtsButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
-    ChangeModalData(name);
+
 
 }, false);
 
@@ -107,7 +116,7 @@ ProvidersButton.addEventListener("click", function(){
     let name = ProvidersButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
-    ChangeModalData(name);
+
 
 }, false);
 
@@ -115,7 +124,7 @@ OrderButton.addEventListener("click", function(){
     let name = OrderButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
     ChangeData(name);
-    ChangeModalData(name);
+
 
 }, false);
 
@@ -130,6 +139,9 @@ const modal = document.getElementById("add-modal");
 const btn = document.getElementById("btn-add");
 
 const btnClose = document.getElementById("btn-close")
+
+const btnCreate = document.getElementById("btn-create")
+
 
 function showModal(){
     if(modal.style.display === ""){
@@ -155,14 +167,16 @@ function UpdateModal(columns){
     for(let j of columns){
 
         tab += `
-        <label >${j}:</label>
+        <label>${j}</label>
         <input type="text" name="" id="">
         `
     
     }
 
-    console.log(tab)
+
+
     body.innerHTML = tab
+
 
 }
     
@@ -197,9 +211,80 @@ function ChangeModalData(path){
 
 }
 
-
+//SET FUNCTIONS AT THE BUTTONS
 btn.addEventListener("click", showModal);
 btnClose.addEventListener("click", showModal);
+btnCreate.addEventListener("click", CreateData);
+
+
+function GetModalValues(){
+
+    let div = document.getElementById("modal-body")
+    let labels = div.querySelectorAll("label")
+    let values = div.querySelectorAll("input")
+ 
+    const formData = new FormData();
+    const formDataJSON = {};
+
+
+    for(let j = 0; j < labels.length; j++){
+
+        formData.append(labels[j].outerText.toLowerCase(), values[j].value);
+        
+    }
+
+
+    formData.forEach((value, key) => {
+        
+        formDataJSON[key] = value
+
+    })
+
+
+  
+    return formDataJSON;
+
+}
+
+
+
+
+async function CreateData(){
+    
+    
+    
+    const AllParams = GetModalValues();
+    
+    console.log(AllParams)
+    try {
+        const response = await fetch("http://localhost:8080/client", { //SHOWING 400 ERROR 
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: AllParams // JSON Body
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao enviar os dados.");
+        }
+
+        const data = await response;
+        console.log("Success: ", data);
+
+    } catch (error) {
+
+        console.error("Erro: ", error);
+
+    }
+    
+ 
+
+
+}
+
 
 
 
