@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,14 @@ public class TeamService {
             "This ID doesn't match any team. Id: " + id + " Type: "+ Team.class.getName()));
     
     }
+
+
+    public List<Team> findAllTeams(){
+        List<Team> teams = this.teamRepository.findAllTeams();
+
+        return teams;
+    }
+
 
 
     //CRUD METHODS

@@ -2,6 +2,7 @@ package com.arthursouza.swiftflowMVP.controllers;
 
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,14 @@ public class TeamController {
         Team team = this.teamService.findbyId(id);
 
         return ResponseEntity.ok().body(team);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Team>> findAllTeams(){
+        List<Team> teams = this.teamService.findAllTeams();
+
+        return ResponseEntity.ok().body(teams);
+
     }
 
     //CRUD METHODS
