@@ -186,19 +186,22 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
 
                 tab += `
                 <label class="modal-body-div-content-label-foreignkey">${i}</label>
+                <select>
                 `
 
                 for(let j of data){
                     console.log(j)
                     tab+=
                     `
-                    <select>
-                        <option>${j.id + " - " + j.name} </option>
-                    </select>
+                    <option>${j.id + " - " + j.name} </option>
+                    
                     `
 
                 }
 
+                tab += `
+                </select>
+                `
             } catch (error) {
                 
                 console.error("URL isn't available or the wrong syntax is being returned: ", error)
@@ -330,6 +333,7 @@ async function CreateData(){
     }
     
  
+    showModal();
 
 
 }
