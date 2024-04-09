@@ -173,3 +173,41 @@ body{
 
 }
 
+
+.body-content-items-orders{
+    display: grid;
+    justify-content: space-evenly;
+    
+}
+
+
+.items-tittle{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    
+}
+
+.items-tittle h2{
+
+    margin: 0 80px;
+    
+}
+
+
+.items-content{
+    display: flex;
+    justify-content: space-evenly;
+
+
+}
+
+
+.items{
+    background-color: aqua;
+    width: 200px;
+    height: 300px;
+    margin: 0 20px;
+    border-radius: 20px;
+}

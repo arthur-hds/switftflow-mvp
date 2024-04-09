@@ -92,6 +92,13 @@ async function ChangeData(path){
 }
 
 
+async function ShowOptions(){
+    
+
+
+}
+
+
 let clientButton = document.getElementById("client");
 let shirtsButton = document.getElementById("shirt");
 let ProvidersButton = document.getElementById("provider");
