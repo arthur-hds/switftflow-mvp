@@ -1,10 +1,19 @@
 package com.arthursouza.swiftflowMVP.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.arthursouza.swiftflowMVP.models.Relations.Disponibility;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -47,6 +56,14 @@ public class Provider {
     @Min(value = 1, message = "Minimum value must be higher or equal than 1")
     @NotNull
     private Integer minimum;
+
+    
+    @OneToMany(mappedBy = "provider_id")
+    @JsonManagedReference
+    @JsonProperty(access = Access.WRITE_ONLY)
+    private List<Disponibility> disponibilities = new ArrayList<Disponibility>();
+
+
 
 
 

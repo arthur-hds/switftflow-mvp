@@ -2,6 +2,7 @@ package com.arthursouza.swiftflowMVP.models.Relations;
 
 import com.arthursouza.swiftflowMVP.models.Provider;
 import com.arthursouza.swiftflowMVP.models.Shirt;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,8 +33,10 @@ public class Disponibility {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @JoinColumn(name = "provider_id", nullable = false)
     @ManyToOne
+    @JsonBackReference
     private Provider provider_id;
     
 
@@ -41,9 +44,11 @@ public class Disponibility {
     @ManyToOne
     private Shirt shirt_id;
 
+
     @Column(name = "price", nullable = false, length = 5)
     @NotNull
     private Double price;
+
 
     @Column(name = "sale", nullable = false, length = 5)
     @NotNull
