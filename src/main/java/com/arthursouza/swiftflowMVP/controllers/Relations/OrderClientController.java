@@ -1,6 +1,7 @@
 package com.arthursouza.swiftflowMVP.controllers.Relations;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,15 @@ public class OrderClientController {
         OrderClient orderClient = this.orderClientService.findById(id);
 
         return ResponseEntity.ok().body(orderClient);
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<OrderClient>> findAllOrderClient(){
+        List<OrderClient> orderClients = this.orderClientService.findAllOrderClient();
+
+        return ResponseEntity.ok().body(orderClients);
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.services.Relations;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class OrderClientService {
             "This ID doesn't match any OrderClient. Id: " + id + " Type: "+ OrderClient.class.getName()));
 
     }
+
+
+    public List<OrderClient> findAllOrderClient(){
+        List<OrderClient> orderClients = this.orderClientRepository.findAllOrderClient();
+
+        return orderClients;
+
+
+    }
+
 
 
     //CRUD METHODS 
