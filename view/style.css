@@ -200,7 +200,7 @@ body{
 
 
 .items{
-    background-color: rgb(195, 245, 245);
+    background-color: #E6F4F1;
     width: 300px;
     height: 300px;
     margin: 0 50px;
@@ -214,7 +214,7 @@ body{
     flex-direction: column;
     align-items: center; 
     border: solid #e7e7e7; 
-    border-width: 0 0 5px 0;
+    border-width: 0 0 2px 0;
     
     padding: 10px; 
 
@@ -222,6 +222,6 @@ body{
     
     min-width: 300px;
     height: 80px;
-    background-color: aqua;
+    background-color: #0A3E3F;
 
 }

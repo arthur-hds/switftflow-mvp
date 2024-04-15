@@ -91,41 +91,59 @@ async function ChangeData(path){
 }
 
 //--------------Functions to set options in the order page--------------
-function showOrder(provider, disponibility){
+function showOrder(data){
 
-    const tittles = ["Prompt Delivery", "Disponibilty", "Interest"]
+    const tittles = ["Disponibilty", "Interest","Prompt-Delivery"]
 
-    tab = ``
+
     
 
     for(let i = 0; i < tittles.length; i++){
         
+        tab = ``
+
         tab += `
 
         <div class="group-content">
             <h2>${tittles[i]}</h2>
 
-            <div class="items">
+            <div id = ${tittles[i].toLowerCase()} class="items">
 
-                <div class="providers">
-                    
-                </div>
+                
 
             </div>
 
         </div>
 
         `
+
+
+        document.getElementById("items-content").innerHTML += tab;
+
+        tab = ``
+
+
+        for(let column of data[i]){
+
+            console.log(column.name)
+
+            tab += `
+            <div class="providers">
+                <h3>${column.name !== undefined ? column.name : column.client_id.name}</h3>      
+            </div>
+            `
         
+        }
 
-        console.log(tittles[i])
-    }
+        document.getElementById(tittles[i].toLowerCase()).innerHTML = tab;
 
-
-    document.getElementById("items-content").innerHTML = tab;
+    }   
+    
 
 
 }
+
+
 
 async function changeDataOrder(){
 
@@ -134,10 +152,12 @@ async function changeDataOrder(){
     const url = "http://localhost:8080/"
 
     let provider = await getAPI(url+ paths[0]);
-    let disponibility = await getAPI(url + paths[1]);
+    let orderClient = await getAPI(url + paths[1]);
 
 
-    showOrder(provider, disponibility);
+
+
+    showOrder([provider, orderClient]);
 
 
 
