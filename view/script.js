@@ -1,7 +1,7 @@
 const url = "http://localhost:8080/"
 let CurrentColumn = ""
 
-
+//--------------Functions to get and set data at table--------------
 function show(data){
 
     let tab =
@@ -52,7 +52,6 @@ function show(data){
 }
 
 
-
 async function getAPI(url){
 
     const response = await fetch(url, {
@@ -91,14 +90,62 @@ async function ChangeData(path){
 
 }
 
+//--------------Functions to set options in the order page--------------
+function showOrder(provider, disponibility){
 
-async function ShowOptions(){
+    const tittles = ["Prompt Delivery", "Disponibilty", "Interest"]
+
+    tab = ``
     
+
+    for(let i = 0; i < tittles.length; i++){
+        
+        tab += `
+
+        <div class="group-content">
+            <h2>${tittles[i]}</h2>
+
+            <div class="items">
+
+                <div class="providers">
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+        `
+        
+
+        console.log(tittles[i])
+    }
+
+
+    document.getElementById("items-content").innerHTML = tab;
+
+
+}
+
+async function changeDataOrder(){
+
+    const paths = ["provider", "orderClient"];
+
+    const url = "http://localhost:8080/"
+
+    let provider = await getAPI(url+ paths[0]);
+    let disponibility = await getAPI(url + paths[1]);
+
+
+    showOrder(provider, disponibility);
+
 
 
 }
 
 
+
+//--------------Headers buttons functions being assigned--------------
 let clientButton = document.getElementById("client");
 let shirtsButton = document.getElementById("shirt");
 let ProvidersButton = document.getElementById("provider");
@@ -132,7 +179,7 @@ ProvidersButton.addEventListener("click", function(){
 OrderButton.addEventListener("click", function(){
     let name = OrderButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
-    ChangeData(name);
+    changeDataOrder();
 
 
 }, false);
