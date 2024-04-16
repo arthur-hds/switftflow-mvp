@@ -47,7 +47,9 @@ function show(data){
         `;
     }
 
-    document.getElementById("table").innerHTML = tab;
+    document.getElementById("table").innerHTML = tab;       //Populate the table div
+    document.getElementById("items-content").innerHTML = ``;  //Clears the order div
+    
 
 }
 
@@ -93,13 +95,16 @@ async function ChangeData(path){
 //--------------Functions to set options in the order page--------------
 function showOrder(data){
 
-    const tittles = ["Disponibilty", "Interest","Prompt-Delivery"]
+    const tittles = ["Disponibilty", "Interest","Prompt-Delivery"]  //Tittles id
 
-
+    document.getElementById("table").innerHTML = ``;       //Clears the table div
+    document.getElementById("items-content").innerHTML = ``;  //Clears the div
     
 
     for(let i = 0; i < tittles.length; i++){
         
+        let tittleLower = tittles[i].toLowerCase()
+
         tab = ``
 
         tab += `
@@ -107,7 +112,7 @@ function showOrder(data){
         <div class="group-content">
             <h2>${tittles[i]}</h2>
 
-            <div id = ${tittles[i].toLowerCase()} class="items">
+            <div id = ${tittleLower} class="items">
 
                 
 
@@ -123,19 +128,23 @@ function showOrder(data){
         tab = ``
 
 
-        for(let column of data[i]){
+        for(let column of data[i]){    // loop to populate all the columns
 
-            console.log(column.name)
+            
 
             tab += `
-            <div class="providers">
+            <div id = ${column.name + "-" + column.id} class="providers">
                 <h3>${column.name !== undefined ? column.name : column.client_id.name}</h3>      
             </div>
             `
         
         }
+    
+        //Shows every item at their respective column
+        let item = document.getElementById(tittleLower)
+        item.innerHTML = tab;
+        
 
-        document.getElementById(tittles[i].toLowerCase()).innerHTML = tab;
 
     }   
     
@@ -162,6 +171,13 @@ async function changeDataOrder(){
 
 
 }
+
+
+// 
+
+
+
+
 
 
 
