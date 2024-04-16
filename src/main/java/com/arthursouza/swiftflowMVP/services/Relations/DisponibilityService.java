@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.services.Relations;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,14 @@ public class DisponibilityService {
 
 
     }
+
+
+    public List<Disponibility> findAllDisponibilities(){
+        List<Disponibility> disponibilities = this.disponibilityRepository.findAllDisponibilities();
+
+        return disponibilities;
+    }
+
 
     //CRUD METHODS 
     @Transactional

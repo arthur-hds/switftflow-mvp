@@ -1,6 +1,7 @@
 package com.arthursouza.swiftflowMVP.controllers.Relations;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,16 @@ public class DisponibilityController {
         Disponibility disponibility = this.disponibilityService.findById(id);
 
         return ResponseEntity.ok().body(disponibility);
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<Disponibility>> findAllDisponibilities(){
+        List<Disponibility> disponibilities = this.disponibilityService.findAllDisponibilities();
+
+        return ResponseEntity.ok().body(disponibilities);
+
+        
     }
 
 
