@@ -30,9 +30,9 @@ function show(data){
             let value = data[j];
             
 
-            if(typeof value[column] === "object"){
-                
-                tab+= `<td scope="row"> ${value[column].id} - ${value[column].name}</td>`
+            if(typeof value[column] === "object" && value[column] !== null){
+        
+                tab+= `<td scope="row"> ${value[column].id} - ${value[column].name !== undefined ? value[column].name : value[column].team_id.name}  </td>`
 
             }else{
 
@@ -93,28 +93,26 @@ async function ChangeData(path){
 }
 
 //--------------Functions to set options in the order page--------------
-function showOrder(data){
+function showOrder(JsonPath, DBpath){
 
-    const tittles = ["Disponibilty", "Interest","Prompt-Delivery"]  //Tittles id
+    const tittles = ["disponibility", "Interest"]  //Tittles id
 
     document.getElementById("table").innerHTML = ``;       //Clears the table div
     document.getElementById("items-content").innerHTML = ``;  //Clears the div
     
 
-    for(let i = 0; i < tittles.length; i++){
+    for(let i = 0; i < tittles.length; i++){    //Creates all the tittles
         
-        let tittleLower = tittles[i].toLowerCase()
+        let tittleID = tittles[i]
 
         tab = ``
 
-        tab += `
+        tab += `  
 
         <div class="group-content">
-            <h2>${tittles[i]}</h2>
+            <h2>${tittleID.toUpperCase()}</h2>
 
-            <div id = ${tittleLower} class="items">
-
-                
+            <div id = ${tittleID} class="items">
 
             </div>
 
@@ -122,51 +120,69 @@ function showOrder(data){
 
         `
 
-
         document.getElementById("items-content").innerHTML += tab;
 
+    }
+        
+    for(let i = 0; i < tittles.length; i++){
+
         tab = ``
+        let tittleID = tittles[i]
+        let columnsID = new Array(); // Id's array
 
-
-        for(let column of data[i]){    // loop to populate all the columns
+        for(let column of JsonPath[i]){    // loop to populate all the columns
 
             
+            let columnID = column.name.replace(/\s+/g, '-') + "-" + column.id  // Gets the content name and replaces the spaces if necessary
+
 
             tab += `
-            <div id = ${column.name + "-" + column.id} class="providers">
-                <h3>${column.name !== undefined ? column.name : column.client_id.name}</h3>      
+            <div id = ${columnID} class="providers">
+                <h3>${column.name}</h3>      
             </div>
             `
         
+            columnsID.push(columnID);  //Adds each id to an array, so that it can be defined by the eventListener after
+            
         }
-    
         //Shows every item at their respective column
-        let item = document.getElementById(tittleLower)
+        let item = document.getElementById(tittleID)
         item.innerHTML = tab;
         
 
+        for(let j of columnsID){  //Adds each button their respective eventListener
 
-    }   
+            console.log(DBpath[i])
+            let contentButton = document.getElementById(j);
+            contentButton.addEventListener("click", function(){
+                ChangeData(DBpath[i]);
+            });
+
+        }
+        
+    }
+
+
+
+}   
     
 
-
-}
 
 
 
 async function changeDataOrder(){
 
-    const paths = ["provider", "orderClient"];
+    const paths = ["provider", "client"];  //This tables will be used to populate the items
 
     const url = "http://localhost:8080/"
 
     let provider = await getAPI(url+ paths[0]);
     let orderClient = await getAPI(url + paths[1]);
 
+    const JsonPath = [provider, orderClient]   //JSON's that will be used to 
+    const DbPaths = ["disponibility", "orderClient"]
 
-
-
-    showOrder([provider, orderClient]);
+    showOrder(JsonPath, DbPaths);
 
 
 
