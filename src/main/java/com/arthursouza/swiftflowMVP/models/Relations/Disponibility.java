@@ -36,7 +36,6 @@ public class Disponibility {
 
     @JoinColumn(name = "provider_id", nullable = false)
     @ManyToOne
-    @JsonBackReference
     private Provider provider_id;
     
 

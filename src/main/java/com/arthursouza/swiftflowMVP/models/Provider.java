@@ -57,12 +57,6 @@ public class Provider {
     @NotNull
     private Integer minimum;
 
-    
-    @OneToMany(mappedBy = "provider_id")
-    @JsonManagedReference
-    @JsonProperty(access = Access.WRITE_ONLY)
-    private List<Disponibility> disponibilities = new ArrayList<Disponibility>();
-
 
 
 
