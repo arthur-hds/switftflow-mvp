@@ -7,7 +7,9 @@ function show(data){
     let tab =
     `<thead>`;
 
-    for (let column in data[0]){
+    const sampleData = data[0] !== undefined ? data[0] : data;
+
+    for (let column in sampleData){
 
         tab += `
         <th scope="col">${column}</th>
@@ -20,18 +22,17 @@ function show(data){
     `;
 
 
-    for(let j = 0; j< Object.values(data).length; j++){
+    function renderRow(value){  //Create tables
 
         tab += `
             <tr>`;
 
-        for(let column in data[0]){
+        for(let column in value){ 
 
-            let value = data[j];
             
-
-            if(typeof value[column] === "object" && value[column] !== null){
         
+            if(typeof value[column] === "object" && value[column] !== null){
+    
                 tab+= `<td scope="row"> ${value[column].id} - ${value[column].name !== undefined ? value[column].name : value[column].team_id.name}  </td>`
 
             }else{
@@ -39,13 +40,28 @@ function show(data){
                 tab+= `<td scope="row"> ${value[column]} </td>`;
             
             }
-
         }
 
         tab +=`  
             </tr>
         `;
     }
+
+
+
+    if(data[0] === undefined){  //Solo JSON
+
+        renderRow(data);
+    
+    }else{                      //Array JSON
+
+        for(let j = 0; j< Object.values(data).length; j++){  //Populate every row
+
+            renderRow(data[j]);
+
+        }
+    }
+
 
     document.getElementById("table").innerHTML = tab;       //Populate the table div
     document.getElementById("items-content").innerHTML = ``;  //Clears the order div
@@ -80,6 +96,7 @@ async function ChangeData(path){
 
     let data = await getAPI(url);
 
+    
     
    
 
