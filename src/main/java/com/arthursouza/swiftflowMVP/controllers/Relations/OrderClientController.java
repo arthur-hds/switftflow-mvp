@@ -48,6 +48,15 @@ public class OrderClientController {
 
     }
 
+    @GetMapping("/client/{id}")
+    public ResponseEntity<List<OrderClient>> findAllClientsOrderClient(@Valid @PathVariable Long id){
+        List<OrderClient> orderClients = this.orderClientService.findAllClientsOrderClient(id);
+
+        return ResponseEntity.ok().body(orderClients);
+
+
+    }
+
 
     //CRUD METHODS
 

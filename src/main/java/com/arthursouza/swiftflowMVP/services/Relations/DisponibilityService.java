@@ -40,6 +40,19 @@ public class DisponibilityService {
     }
 
 
+
+    public List<Disponibility> findAllProvidersDisponibilities(Long id){
+        List<Disponibility> disponibilities = this.disponibilityRepository.findAllProvidersDisponibilities(id);
+
+        return disponibilities;
+
+
+    }
+
+
+
+
+
     //CRUD METHODS 
     @Transactional
     public Disponibility create(@Valid Disponibility disponibility){

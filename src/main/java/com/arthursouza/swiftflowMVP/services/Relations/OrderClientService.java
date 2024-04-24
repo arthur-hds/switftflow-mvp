@@ -41,6 +41,15 @@ public class OrderClientService {
     }
 
 
+    public List<OrderClient> findAllClientsOrderClient(Long id){
+        List<OrderClient> orderClients = this.orderClientRepository.findAllClientsOrderClient(id);
+
+        return orderClients;
+
+    }
+
+
+
 
     //CRUD METHODS 
     @Transactional

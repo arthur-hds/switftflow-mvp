@@ -49,6 +49,17 @@ public class DisponibilityController {
     }
 
 
+    @GetMapping("/provider/{id}")
+    public ResponseEntity<List<Disponibility>> findAllProvidersDisponibilities (@Valid @PathVariable long id){
+        List<Disponibility> disponibilities = this.disponibilityService.findAllProvidersDisponibilities(id);
+
+        return ResponseEntity.ok().body(disponibilities);
+
+
+    }
+
+
+
     //CRUD METHODS
 
     @PostMapping
