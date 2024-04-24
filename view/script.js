@@ -29,8 +29,6 @@ function show(data){
 
         for(let column in value){ 
 
-            
-        
             if(typeof value[column] === "object" && value[column] !== null){
     
                 tab+= `<td scope="row"> ${value[column].id} - ${value[column].name !== undefined ? value[column].name : value[column].team_id.name}  </td>`
@@ -169,10 +167,12 @@ function showOrder(JsonPath, DBpath){
 
         for(let j of columnsID){  //Adds each button their respective eventListener
 
-            console.log(DBpath[i])
+            let columns = j.split("-");
+            let columnID = columns[columns.length -1]; //These 2 lines gets the final id at it respective clicked column
+            
             let contentButton = document.getElementById(j);
             contentButton.addEventListener("click", function(){
-                ChangeData(DBpath[i]);
+                ChangeData(DBpath[i] + columnID);
             });
 
         }
@@ -197,7 +197,7 @@ async function changeDataOrder(){
     let orderClient = await getAPI(url + paths[1]);
 
     const JsonPath = [provider, orderClient]   //JSON's that will be used to 
-    const DbPaths = ["disponibility", "orderClient"]
+    const DbPaths = ["disponibility/provider/", "orderClient/client/"]
 
     showOrder(JsonPath, DbPaths);
 
