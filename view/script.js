@@ -111,6 +111,7 @@ async function ChangeData(path){
 function showOrder(JsonPath, DBpath){
 
     const tittles = ["disponibility", "Interest"]  //Tittles id
+    const DBColumn = ["disponibility", "order_client"]
 
     document.getElementById("table").innerHTML = ``;       //Clears the table div
     document.getElementById("items-content").innerHTML = ``;  //Clears the div
@@ -173,6 +174,8 @@ function showOrder(JsonPath, DBpath){
             let contentButton = document.getElementById(j);
             contentButton.addEventListener("click", function(){
                 ChangeData(DBpath[i] + columnID);
+                console.log("DBCOLUMN: "+ DBColumn[i])
+                ChangeModalData(DBColumn[i])
             });
 
         }
@@ -190,6 +193,8 @@ function showOrder(JsonPath, DBpath){
 async function changeDataOrder(){
 
     const paths = ["provider", "client"];  //This tables will be used to populate the items
+
+
 
     const url = "http://localhost:8080/"
 
@@ -288,7 +293,29 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
 
     const body = document.getElementById("modal-body");
 
-   
+    async function renderSelect(paths){     // Function to render the multi options element
+        const data = await getAPI(url+paths);
+        console.log(data)
+
+        tab += `
+        <label class="modal-body-div-content-label-foreignkey">${i}</label>
+        <select>
+        `
+
+        for(let j of data){
+            console.log(j)
+            tab+=
+            `
+            <option>${j.id + " - " + j.name} </option>
+            
+            `
+
+        }
+
+        tab += `
+        </select>
+        `
+    }
     
 
     let tab = ``
@@ -303,28 +330,20 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
             console.log(path)
             
             try {
-                
-                const data = await getAPI(url+path);
-                console.log(data)
+                //! SELECT ELEMENTS NOT SHOWING
+                if(Array.isArray(path)){
 
-                tab += `
-                <label class="modal-body-div-content-label-foreignkey">${i}</label>
-                <select>
-                `
+                    for(let k of path){
+                        renderSelect(k);
+                    }
 
-                for(let j of data){
-                    console.log(j)
-                    tab+=
-                    `
-                    <option>${j.id + " - " + j.name} </option>
-                    
-                    `
+                }else{
+
+                    renderSelect(path)
 
                 }
 
-                tab += `
-                </select>
-                `
+                
             } catch (error) {
                 
                 console.error("URL isn't available or the wrong syntax is being returned: ", error)
@@ -376,6 +395,12 @@ function ChangeModalData(path){
             tittle.innerHTML = "PROVIDER";
             UpdateModal(["Name", "Delivery", "Minimum"])
             break
+
+        case "DISPONIBILITY":
+            tittle.innerHTML = "DISPONIBILITY";
+            UpdateModal(["Provider_id", "Shirt_id", "Price", "Sale"], "provider", true)
+            break
+        
     }
     
 
