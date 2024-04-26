@@ -1,6 +1,6 @@
 const url = "http://localhost:8080/"
 let CurrentColumn = ""
-
+let CurrentColumnOrigin = ""
 //--------------Functions to get and set data at table--------------
 function show(data){
 
@@ -85,8 +85,10 @@ async function getAPI(url){
 async function ChangeData(path){
 
     
-    CurrentColumn = path;
-  
+    CurrentColumn = path;   //Path that gonna be showed at the url and GET /method
+    CurrentColumnOrigin = path.split("/").length > 1 ? path.split("/")[0] : path  // Path used to sent POST methods
+    console.log("CURRENT COLUMN ORIGIN: "+ CurrentColumnOrigin)
+
   
 
     const url = "http://localhost:8080/"+ CurrentColumn;
@@ -460,7 +462,7 @@ async function CreateData(){
     
     
     try {
-        const response = await fetch(url + CurrentColumn, { 
+        const response = await fetch(url + CurrentColumnOrigin, { 
             method: "POST",
 
             headers: {
@@ -471,7 +473,7 @@ async function CreateData(){
         });
 
         if (!response.ok) {
-            throw new Error("Erro ao enviar os dados.");
+            throw new Error("Error in the process of sending data.");
         }
 
         const data = await response;
