@@ -292,36 +292,40 @@ function showModal(){
 async function UpdateModal(columns, path=null, handleForeignKey = false){
 
     const body = document.getElementById("modal-body");
+    let tab = ``;
+    let lengthIndex = 0;  //Variable that can provide the right index to array paths
 
-    async function renderSelect(paths){     // Function to render the multi options element
+
+    async function renderSelect(paths, nameColumn){     // Function to render the multi options element
         const data = await getAPI(url+paths);
         console.log(data)
 
         tab += `
-        <label class="modal-body-div-content-label-foreignkey">${i}</label>
+        <label class="modal-body-div-content-label-foreignkey">${nameColumn}</label>
         <select>
         `
 
-        for(let j of data){
-            console.log(j)
+        data.forEach((j) => {
+
+
+
             tab+=
             `
-            <option>${j.id + " - " + j.name} </option>
+            <option>${j.id} - ${j.name !== undefined ? j.name : j.team_id.name + " - " + j.season + " - "+ j.type} </option>
             
-            `
-
-        }
+            `;
+        });
 
         tab += `
         </select>
         `
+        
+
     }
     
 
-    let tab = ``
 
-
-    for(let i of columns){
+    const tasks = columns.map(async (i) =>{
 
 
 
@@ -330,16 +334,15 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
             console.log(path)
             
             try {
-                //! SELECT ELEMENTS NOT SHOWING
+                
                 if(Array.isArray(path)){
 
-                    for(let k of path){
-                        renderSelect(k);
-                    }
+                    await renderSelect(path[lengthIndex++], i);
+                
 
                 }else{
 
-                    renderSelect(path)
+                    await renderSelect(path, i);
 
                 }
 
@@ -362,9 +365,9 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
 
         
     
-    }
+    });
 
-
+    await Promise.all(tasks);  //Wait for all tasks to complete
 
     body.innerHTML = tab 
 
@@ -398,7 +401,7 @@ function ChangeModalData(path){
 
         case "DISPONIBILITY":
             tittle.innerHTML = "DISPONIBILITY";
-            UpdateModal(["Provider_id", "Shirt_id", "Price", "Sale"], "provider", true)
+            UpdateModal(["Provider_id", "Shirt_id", "Price", "Sale"], ["provider", "shirt"], true)
             break
         
     }
