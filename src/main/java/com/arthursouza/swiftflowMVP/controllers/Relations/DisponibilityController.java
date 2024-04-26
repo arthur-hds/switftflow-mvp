@@ -63,8 +63,11 @@ public class DisponibilityController {
     //CRUD METHODS
 
     @PostMapping
+    @Validated
     public ResponseEntity<Void> create(@Valid @RequestBody DisponibilityCreateDTO obj){
         Disponibility disponibility = this.disponibilityService.fromDTO(obj);
+
+        this.disponibilityService.create(disponibility);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
         .path("/{id}").buildAndExpand(disponibility.getId()).toUri();
@@ -74,6 +77,7 @@ public class DisponibilityController {
 
     
     @PutMapping("/{id}")
+    @Validated
     public ResponseEntity<Void> update(@Valid @RequestBody DisponibilityUpdateDTO obj, @Valid @PathVariable Long id){
         Disponibility disponibility = this.disponibilityService.fromDTO(obj, id);
 
