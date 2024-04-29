@@ -175,9 +175,11 @@ function showOrder(JsonPath, DBpath){
             
             let contentButton = document.getElementById(j);
             contentButton.addEventListener("click", function(){
+                
                 ChangeData(DBpath[i] + columnID);
                 console.log("DBCOLUMN: "+ DBColumn[i])
                 ChangeModalData(DBColumn[i])
+                
             });
 
         }
@@ -405,6 +407,12 @@ function ChangeModalData(path){
             tittle.innerHTML = "DISPONIBILITY";
             UpdateModal(["Provider_id", "Shirt_id", "Price", "Sale"], ["provider", "shirt"], true)
             break
+
+        case "ORDER_CLIENT":
+            tittle.innerHTML = "ORDER CLIENT";
+            UpdateModal(["Client_id", "Shirt_id", "Size", "Additional", "Discount"], ["client", "shirt"], true)
+            break
+        
         
     }
     
@@ -435,8 +443,9 @@ function GetModalValues(){
 
         //Condition that prepares the body in cases of Foreign Keys
         if(labels[j].className === "modal-body-div-content-label-foreignkey"){
-
-            value = {"id": value.charAt(0)}
+            
+            value = value.split("-").map((x) => x.trim()) //Gets the id value in the array select
+            value = {"id": value[0]}
            
         }        
 
@@ -462,6 +471,7 @@ async function CreateData(){
     
     
     try {
+        console.log(JSON.stringify(AllParams))
         const response = await fetch(url + CurrentColumnOrigin, { 
             method: "POST",
 
