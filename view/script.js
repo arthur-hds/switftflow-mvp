@@ -4,65 +4,79 @@ let CurrentColumnOrigin = ""
 //--------------Functions to get and set data at table--------------
 function show(data){
 
-    let tab =
-    `<thead>`;
+    console.log("Data: ", data.length )
 
-    const sampleData = data[0] !== undefined ? data[0] : data;
-
-    for (let column in sampleData){
-
-        tab += `
-        <th scope="col">${column}</th>
-        `
-    }
-
-    tab += 
-    `
-        </thead>
-    `;
-
-
-    function renderRow(value){  //Create tables
-
-        tab += `
-            <tr>`;
-
-        for(let column in value){ 
-
-            if(typeof value[column] === "object" && value[column] !== null){
+    if(data.length > 0){  // Checks if the response is null or not
+        let tab =
+        `<thead>`;
     
-                tab+= `<td scope="row"> ${value[column].id} - ${value[column].name !== undefined ? value[column].name : value[column].team_id.name}  </td>`
-
-            }else{
-
-                tab+= `<td scope="row"> ${value[column]} </td>`;
-            
+        const sampleData = data[0] !== undefined ? data[0] : data;
+    
+        for (let column in sampleData){
+    
+            tab += `
+            <th scope="col">${column}</th>
+            `
+        }
+    
+        tab += 
+        `
+            </thead>
+        `;
+    
+    
+        function renderRow(value){  //Create tables
+    
+            tab += `
+                <tr>`;
+    
+            for(let column in value){ 
+    
+                if(typeof value[column] === "object" && value[column] !== null){
+        
+                    tab+= `<td scope="row"> ${value[column].id} - ${value[column].name !== undefined ? value[column].name : value[column].team_id.name}  </td>`
+    
+                }else{
+    
+                    tab+= `<td scope="row"> ${value[column]} </td>`;
+                
+                }
+            }
+    
+            tab +=`  
+                </tr>
+            `;
+        }
+    
+    
+    
+        if(data[0] === undefined){  //Solo JSON
+    
+            renderRow(data);
+        
+        }else{                      //Array JSON
+    
+            for(let j = 0; j< Object.values(data).length; j++){  //Populate every row
+    
+                renderRow(data[j]);
+    
             }
         }
-
-        tab +=`  
-            </tr>
-        `;
-    }
-
-
-
-    if(data[0] === undefined){  //Solo JSON
-
-        renderRow(data);
     
-    }else{                      //Array JSON
+    
+        document.getElementById("table").innerHTML = tab;       //Populate the table div
+        document.getElementById("items-content").innerHTML = ``;  //Clears the order div
 
-        for(let j = 0; j< Object.values(data).length; j++){  //Populate every row
+        
+    }else{
 
-            renderRow(data[j]);
+        let tab = `<i class="bi bi-emoji-dizzy" style="font-size: 10rem; color: #5f4d8a;"></i>`;
+        tab += `<h2 style="color: #5f4d8a;"> There is no data avaiable here... </h2>`
+        
+        document.getElementById("items-content").innerHTML = tab;
+        
 
-        }
     }
-
-
-    document.getElementById("table").innerHTML = tab;       //Populate the table div
-    document.getElementById("items-content").innerHTML = ``;  //Clears the order div
     
 
 }
@@ -89,7 +103,7 @@ async function ChangeData(path){
     CurrentColumnOrigin = path.split("/").length > 1 ? path.split("/")[0] : path  // Path used to sent POST methods
     console.log("CURRENT COLUMN ORIGIN: "+ CurrentColumnOrigin)
 
-  
+    
 
     const url = "http://localhost:8080/"+ CurrentColumn;
     
@@ -302,7 +316,7 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
 
     async function renderSelect(paths, nameColumn){     // Function to render the multi options element
         const data = await getAPI(url+paths);
-        console.log(data)
+        
 
         tab += `
         <label class="modal-body-div-content-label-foreignkey">${nameColumn}</label>
@@ -443,7 +457,7 @@ function GetModalValues(){
 
         //Condition that prepares the body in cases of Foreign Keys
         if(labels[j].className === "modal-body-div-content-label-foreignkey"){
-            
+
             value = value.split("-").map((x) => x.trim()) //Gets the id value in the array select
             value = {"id": value[0]}
            
@@ -471,7 +485,7 @@ async function CreateData(){
     
     
     try {
-        console.log(JSON.stringify(AllParams))
+    
         const response = await fetch(url + CurrentColumnOrigin, { 
             method: "POST",
 

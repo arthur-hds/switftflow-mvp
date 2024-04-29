@@ -177,7 +177,7 @@ body{
 .body-content-items-orders{
     display: grid;
     justify-content: space-evenly;
-    
+    text-align: center;
 
     
 }
@@ -195,7 +195,7 @@ body{
 .items-content{
     display: flex;
     justify-content: space-between;
-    
+    align-items: center;
 }
 
 
