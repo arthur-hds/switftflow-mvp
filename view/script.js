@@ -10,7 +10,7 @@ function show(data){
         let tab =
         `<thead>`;
     
-        const sampleData = data[0] !== undefined ? data[0] : data;
+        const sampleData = data[0] !== undefined ? data[0] : data;  //Returns the Table JSON
     
         for (let column in sampleData){
     
@@ -73,7 +73,7 @@ function show(data){
         let tab = `<i class="bi bi-emoji-dizzy" style="font-size: 10rem; color: #5f4d8a;"></i>`;
         tab += `<h2 style="color: #5f4d8a;"> There is no data avaiable here... </h2>`
         
-        document.getElementById("items-content").innerHTML = tab;
+        document.getElementById("items-content").innerHTML = tab;  //Adds the following error alert content
         
 
     }
@@ -82,13 +82,15 @@ function show(data){
 }
 
 
+
+//--------------Function to pull the db content--------------
 async function getAPI(url){
 
-    const response = await fetch(url, {
-        method: "GET"});
+    const response = await fetch(url, {     // Gets the response body
+        method: "GET"});     
 
     
-    const data = await response.json();
+    const data = await response.json();  
     
     console.log(Object.values(data).length);
     
@@ -96,6 +98,7 @@ async function getAPI(url){
 }
 
 
+//--------------Function to pull the db content--------------
 async function ChangeData(path){
 
     
@@ -156,7 +159,7 @@ function showOrder(JsonPath, DBpath){
 
     }
         
-    for(let i = 0; i < tittles.length; i++){
+    for(let i = 0; i < tittles.length; i++){  //Creates all the buttons
 
         tab = ``
         let tittleID = tittles[i]
@@ -207,7 +210,7 @@ function showOrder(JsonPath, DBpath){
 
 
 
-
+//--------------Functions to set the tittles and columns names when clicked at the Order option--------------
 async function changeDataOrder(){
 
     const paths = ["provider", "client"];  //This tables will be used to populate the items
@@ -244,6 +247,7 @@ let ProvidersButton = document.getElementById("provider");
 let OrderButton = document.getElementById("order");
 
 
+//--------------Setting the click functions--------------
 clientButton.addEventListener("click", function(){
     let name = clientButton.id;
     document.getElementById("tittle").innerHTML = name.toUpperCase();
@@ -343,7 +347,7 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
     
 
 
-    const tasks = columns.map(async (i) =>{
+    const tasks = columns.map(async (i) =>{   //Loop that will render each value
 
 
 
@@ -353,7 +357,7 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
             
             try {
                 
-                if(Array.isArray(path)){
+                if(Array.isArray(path)){   // Render with there is more than one select
 
                     await renderSelect(path[lengthIndex++], i);
                 
@@ -371,9 +375,9 @@ async function UpdateModal(columns, path=null, handleForeignKey = false){
 
             }
 
-        }else{
+        }else{  //Adds normal input
 
-            tab += `
+            tab += ` 
             <label>${i}</label>
             <input type="text" name="" id="">
             `
@@ -476,7 +480,7 @@ function GetModalValues(){
 
 
 
-
+//--------------Functions that POST all the info that have been colected at the modal--------------
 async function CreateData(){
     
     
