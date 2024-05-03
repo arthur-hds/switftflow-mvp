@@ -1,5 +1,8 @@
 package com.arthursouza.swiftflowMVP.models.Relations;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.arthursouza.swiftflowMVP.models.Provider;
 import com.arthursouza.swiftflowMVP.models.Shirt;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -10,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -52,6 +56,9 @@ public class Disponibility {
     @Column(name = "sale", nullable = false, length = 5)
     @NotNull
     private Double sale;
+
+    @ManyToMany(mappedBy = "disponibility")
+    private Set<FinalOrder> orders = new HashSet<>();
 
 
 }
