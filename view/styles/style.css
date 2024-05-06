@@ -1,0 +1,262 @@
+body{
+    background-color: #170e35;
+    
+}
+
+.header-div{
+    
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+ 
+    margin: 30px 0px 30px 0px;
+
+    
+}
+
+.header-div h2{
+    font-weight: 600;
+    font-size: 32px !important;
+    font-style: normal;
+    color: white;
+}
+
+.--bs-body-font-size{
+    
+    font-size: 102px !important;
+  
+}
+
+.headers-buttons-div{
+    display: flex;
+    justify-content: space-evenly;
+    
+
+}
+
+.headers-buttons-div h2{
+    margin: 0 0px 0px 24px;
+    cursor: pointer;
+}
+
+.headers-logo-div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#logo{
+    height: 40px;
+    width: 40px;
+    
+}
+
+.body-content-div{
+
+  
+    justify-content: center;
+    display: grid;
+    padding: 30px 0px 30px 0px;
+    
+    grid-gap: 24px; 
+
+    text-align: end;
+
+}
+
+
+
+
+.body-content-items-div{
+
+    min-width: 1160px;
+    min-height: 521px;
+    background-color: #453864;
+    color: #F8EBFF;
+    
+    padding: 60px;
+    border-radius: 20px;
+    justify-content: center;
+    
+    align-items: center;
+
+}
+
+.table{
+    color: #F8EBFF;
+}
+
+
+.btn-add{
+    font-family: "Poppins", sans-serif !important;
+    margin-right: 12px;
+    background-color: #F8EBFF;
+    color: #453864;
+    padding: 5px 30px 5px 30px;
+    border: 1px solid #888;
+    
+
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px;
+    
+}
+
+
+.btn-create-order{
+    font-family: "Poppins", sans-serif !important;
+    margin-right: 12px;
+    background-color: #F8EBFF;
+    color: #453864;
+    padding: 5px 30px 5px 30px;
+    border: 1px solid #888;
+    
+
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px;
+}
+
+
+.modal-div{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-div-content{
+    
+
+
+    position: relative;
+    background-color: #F8EBFF;
+    border: 20px;
+    border-color: #F8EBFF;
+    border-radius: 15px;
+                
+    margin: auto;
+    padding: 5px 30px 5px 30px;
+    border: 1px solid #888;
+    width: 30%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    font-family: "Poppins", sans-serif !important;
+
+    
+}
+
+.modal-header-div-content{
+
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 0px 20px; 
+
+}
+
+
+.modal-body-div-content{
+    display: grid;
+    margin: 20px;
+ 
+}
+
+.modal-footer-div-content{
+    text-align: center;
+    padding: 20px;
+    
+ 
+}
+
+.close-modal{
+    float: right;
+    font-size: large;
+ 
+}
+
+.close-modal:hover{
+    color: #888;
+    cursor: pointer;
+
+}
+
+
+.body-content-items-orders{
+    display: grid;
+    justify-content: space-evenly;
+    text-align: center;
+
+    
+}
+
+
+
+
+.group-content h2{
+
+    margin: 8px 0 16px 0;
+    text-align: center;
+}  
+
+
+.items-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.items{
+    background-color: #E6F4F1;
+    width: 300px;
+    height: 300px;
+    margin: 0 50px;
+    border-radius: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    cursor: pointer;
+}
+
+.items::-webkit-scrollbar{
+    width: 12px;
+    background-color: #27185b;
+    border-radius: 0 20px 20px 0;
+}
+
+
+.items::-webkit-scrollbar-thumb{
+    width: 1px;
+    background-color: #53428d;
+    border-radius: 20px;
+}
+
+
+.providers{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    border: solid #e7e7e7; 
+    border-width: 0 0 1px 0;
+    
+    padding: 10px; 
+
+    overflow: auto;
+    
+    min-width: 300px;
+    height: 80px;
+    background-color: #170e35;
+
+}
+
+.providers:hover{
+    background-color: #53428d;
+
+}

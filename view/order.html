@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwiftFlow</title>
-
-    <!-- GOOGLE FONTS ISN'T WORKING WELL WITH BOOTSTRAP LINKS -->
+    <title>Ordering</title>
+<!-- GOOGLE FONTS ISN'T WORKING WELL WITH BOOTSTRAP LINKS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,36 +17,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/view/styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <link rel="stylesheet" href="styles/order.css">
+    
     <script src="scripts/script.js" defer></script>
 
-    
 
 </head>
 <body>
     
-    <!-- Category buttons -->
+
     <div class="header-div">
 
-        <div class="headers-logo-div">
-            <img src="/view/images/SwiftFlowLogo.png" id="logo" alt="">
-            <h2>SwiftFlow</h2>
+        <div class="headers-arrow">
+            <i class="bi bi-arrow-left" style="font-size: 2rem; color: #F8EBFF;"></i>
+            
         </div>
         
-        <div class="headers-buttons-div">
-            <h2 id="client">Clients</h2>
-            <h2 id="shirt">Shirts</h2>
-            <h2 id="provider">Providers</h2>
-            <h2 id="order">Order</h2>
+        <div class="headers-tittle">
+            <h2>Order</h2>
         </div>
 
     </div>
 
 
-    <!-- Content -->
-    <div class="body-content-div">
+     <!-- Content -->
+     <div class="body-content-div">
 
 
         <!-- Trigger/Open The Modal -->
@@ -69,7 +64,7 @@
     
             <div class="d-flex">
 
-                <p class="h1 text-center flex-grow-1" id="tittle">Clients</p>
+                <p class="h1 text-center flex-grow-1 " id="tittle">Clients</p>
                 
             </div>
 
@@ -102,51 +97,13 @@
 
     </div>
 
-    <!-- Create items modal -->
-    <div id="add-modal" class="modal-div">
-        
-        <div class="modal-div-content">
-
-            <div class="modal-header-div-content">
-                <h2 id="tittle-modal">tittle</h2>
-
-                <span id="btn-close" class="close-modal">X</span>
-
-            </div>
-
-            <div id="modal-body" class="modal-body-div-content">
-
-
-                <label for="fname">ContentName:</label>
-                <input type="text" name="" id="">
-
-                <label for="fname">ContentName:</label>
-                <input type="text" name="" id="">
-
-                <label for="fname">ContentName:</label>
-                <input type="text" name="" id="">
-
-
-            </div>
-
-            <div class="modal-footer-div-content">
-
-                <button id="btn-create" class="btn-add">Criar</button>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-    
 
     <script 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous">
     </script>
+
 
 </body>
 </html>

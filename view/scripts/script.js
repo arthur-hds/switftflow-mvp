@@ -4,7 +4,7 @@ let CurrentColumnOrigin = ""
 //--------------Functions to get and set data at table--------------
 function show(data){
 
-    console.log("Data: ", data.length )
+    console.log("Data: ", data )
 
     if(data.length > 0){  // Checks if the response is null or not
         let tab =
@@ -33,7 +33,9 @@ function show(data){
             for(let column in value){ 
     
                 if(typeof value[column] === "object" && value[column] !== null){
-        
+                    
+                    console.log("Column::: ", value[column])
+
                     tab+= `<td scope="row"> ${value[column].id} - ${value[column].name !== undefined ? value[column].name : value[column].team_id.name}  </td>`
     
                 }else{
@@ -114,7 +116,7 @@ async function ChangeData(path){
     let data = await getAPI(url);
 
     
-    
+    updateButtons(btn, btnCreateOrder)  // Shows the "add" button, while hiding the other one
    
 
     ChangeModalData(path)
@@ -222,8 +224,12 @@ async function changeDataOrder(){
     let provider = await getAPI(url+ paths[0]);
     let orderClient = await getAPI(url + paths[1]);
 
+
     const JsonPath = [provider, orderClient]   //JSON's that will be used to 
     const DbPaths = ["disponibility/provider/", "orderClient/client/"]
+    
+    updateButtons(btnCreateOrder, btn) // Shows the "Create order" button, while hiding the other one
+
 
     showOrder(JsonPath, DbPaths);
 
@@ -231,6 +237,13 @@ async function changeDataOrder(){
 
 }
 
+
+
+function updateButtons(show, hide){  //It switch the values of buttons styles, to be displayed or not
+
+    [show.style.display, hide.style.display] = ["", "none"]
+
+}
 
 // 
 
@@ -278,6 +291,7 @@ OrderButton.addEventListener("click", function(){
     changeDataOrder();
 
 
+
 }, false);
 
 
@@ -294,6 +308,7 @@ const btnClose = document.getElementById("btn-close")
 
 const btnCreate = document.getElementById("btn-create")
 
+const btnCreateOrder = document.getElementById("btn-create-order")
 
 function showModal(){
     if(modal.style.display === ""){
@@ -442,6 +457,10 @@ function ChangeModalData(path){
 btn.addEventListener("click", showModal);
 btnClose.addEventListener("click", showModal);
 btnCreate.addEventListener("click", CreateData);
+btnCreateOrder.addEventListener("click", changeWindow)
+
+
+
 
 
 function GetModalValues(){
@@ -521,7 +540,9 @@ async function CreateData(){
 
 
 
-
+function changeWindow(){
+    window.location = "order.html";
+}
 
 
 

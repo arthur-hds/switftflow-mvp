@@ -6,6 +6,7 @@ import java.util.Set;
 import com.arthursouza.swiftflowMVP.models.Provider;
 import com.arthursouza.swiftflowMVP.models.Shirt;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,6 +58,7 @@ public class Disponibility {
     @NotNull
     private Double sale;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "disponibility")
     private Set<FinalOrder> orders = new HashSet<>();
 

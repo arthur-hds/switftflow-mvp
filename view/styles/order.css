@@ -8,7 +8,7 @@ body{
     display: flex;
     justify-content: space-evenly;
     text-align: center;
- 
+    
     margin: 30px 0px 30px 0px;
 
     
@@ -20,6 +20,25 @@ body{
     font-style: normal;
     color: white;
 }
+
+
+
+.headers-arrow{ 
+
+    justify-content: flex-start;;
+
+}
+
+.headers-tittle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
 
 .--bs-body-font-size{
     
@@ -39,11 +58,7 @@ body{
     cursor: pointer;
 }
 
-.headers-logo-div {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
+
 
 #logo{
     height: 40px;
@@ -94,84 +109,28 @@ body{
     color: #453864;
     padding: 5px 30px 5px 30px;
     border: 1px solid #888;
-
+    
 
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 12px;
     
 }
 
-.modal-div{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
 
-.modal-div-content{
-    
-
-
-    position: relative;
+.btn-create-order{
+    font-family: "Poppins", sans-serif !important;
+    margin-right: 12px;
     background-color: #F8EBFF;
-    border: 20px;
-    border-color: #F8EBFF;
-    border-radius: 15px;
-                
-    margin: auto;
+    color: #453864;
     padding: 5px 30px 5px 30px;
     border: 1px solid #888;
-    width: 30%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-    font-family: "Poppins", sans-serif !important;
-
     
-}
 
-.modal-header-div-content{
-
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 20px 0px 20px; 
-
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px;
 }
 
 
-.modal-body-div-content{
-    display: grid;
-    margin: 20px;
- 
-}
-
-.modal-footer-div-content{
-    text-align: center;
-    padding: 20px;
-    
- 
-}
-
-.close-modal{
-    float: right;
-    font-size: large;
- 
-}
-
-.close-modal:hover{
-    color: #888;
-    cursor: pointer;
-
-}
 
 
 .body-content-items-orders{
