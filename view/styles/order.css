@@ -105,11 +105,7 @@ body{
 
 
 
-#logo{
-    height: 40px;
-    width: 40px;
-    
-}
+
 
 .body-content-div{
 
@@ -147,14 +143,24 @@ body{
 }
 
 
+.btn-div{
+
+    width: 100%;
+    padding: 1%;
+    margin-top: 5% ;
+    text-align: center;
+
+}
+
 .btn-add{
     font-family: "Poppins", sans-serif !important;
-    margin-right: 12px;
-    background-color: #F8EBFF;
-    color: #453864;
-    padding: 5px 30px 5px 30px;
-    border: 1px solid #888;
     
+    
+    background-color: #170e35;
+    color: #F8EBFF;
+    padding: 10px 50px 10px 50px;
+    border: 1px solid #888;
+    font-size: 20px;
 
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 12px;
@@ -205,7 +211,7 @@ body{
 
 .items{
     background-color: #E6F4F1;
-    width: 300px;
+    width: 600px;
     height: 300px;
     margin: 0 50px;
     border-radius: 20px;
