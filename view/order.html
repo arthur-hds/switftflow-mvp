@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="styles/order.css">
     
-    <script src="scripts/script.js" defer></script>
+    <script src="scripts/orderScript.js" defer></script>
 
 
 </head>
@@ -32,7 +32,7 @@
 
         <div class="headers-arrow">
 
-            <div class="headers-arrow__icon">
+            <div class="headers-arrow__icon" onclick="changeWindow()">
                 <i class="bi bi-arrow-left" style="font-size: 2rem; color: #F8EBFF;"></i>
                 
             </div>
@@ -50,7 +50,10 @@
                 <div class="headers-tittle__elements__provider">
 
                     <h3>Select the provider:</h3>
-                    <select name="" id=""></select>
+                    <select onchange="providerSelected(event)" id="select-provider">
+                        
+
+                    </select>
 
                 </div>
 
@@ -94,7 +97,7 @@
                         <div class="group-content">
                             <h2>Kits avaiable</h2>
                 
-                            <div id = Teste class="items">
+                            <div id = "items-left-container" class="items">
                                 
                             </div>
                 
@@ -110,8 +113,8 @@
                         <div class="group-content">
                             <h2>Selected</h2>
                 
-                            <div id = Teste class="items">
-                
+                            <div class="items">
+                                
                             </div>
                 
                         </div>
@@ -130,7 +133,7 @@
 
             <div class="btn-div">
 
-                <button id="btn-create" class="btn-add">Criar</button>
+                <button id="btn-create" class="btn-add" >Criar</button>
 
             </div>
 

@@ -37,6 +37,7 @@ body{
     display: flex;
     margin-left: 10%;
     justify-content: flex-start;
+    cursor: pointer;
     
 
 }
