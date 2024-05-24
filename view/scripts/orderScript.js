@@ -8,19 +8,20 @@ async function getApi(url){
 
 }
 
-
+//--------------Function to change HTML when back arrow pressed--------------
 function changeWindow(){
     window.location = "index.html";
 }
 
 
+//--------------Function to set all the disponibilities at the selected provider--------------
 async function providerSelected(value){
 
     const providerID = value.target.value
     const url = "http://localhost:8080/disponibility/provider/"+providerID
     const data = await getApi(url)
 
-    let tab = ""
+    let tab = ``
 
     function loadUpDisponibilty (value){
 
@@ -32,7 +33,7 @@ async function providerSelected(value){
 
         tab += `
         <div class="providers">
-            <h3>${shirt.team} - ${shirt.type} - ${shirt.season}</h3>
+            <h4>${shirt.team} - ${shirt.type} - ${shirt.season}</h4>
         </div>
         `
         
@@ -43,9 +44,51 @@ async function providerSelected(value){
         loadUpDisponibilty(i)
     }
 
+
+
     const disponibilities = document.getElementById("items-left-container")
+    const selected = document.getElementById("items-right-container")
+    
+    selected.innerHTML = ``
     disponibilities.innerHTML = tab
 
+
+
+    const items = document.getElementsByClassName("providers")
+    tab = ``
+
+
+    
+    //Function to set each EventListener at the buttons
+    for (let i of items){
+
+        i.addEventListener("click", function(){
+    
+            console.log(i.innerText)
+            moveToSelected(i)
+            
+
+        })
+
+    }
+
+
+}
+
+
+function moveToSelected(row){
+    const tittle = row.innerText
+    
+
+    let tab = `
+    <div class="providers">
+        <h4>${tittle}</h4>
+    </div>
+    `
+
+
+    const selected = document.getElementById("items-right-container")
+    selected.innerHTML += tab
 
 }
 

@@ -242,15 +242,16 @@ body{
     border: solid #e7e7e7; 
     border-width: 0 0 1px 0;
     
-    padding: 10px; 
+    padding: 0.5%;
 
-    overflow: auto;
+    
     
     min-width: 300px;
-    height: 80px;
+    height: 40px;
     background-color: #170e35;
 
 }
+
 
 .providers:hover{
     background-color: #53428d;
