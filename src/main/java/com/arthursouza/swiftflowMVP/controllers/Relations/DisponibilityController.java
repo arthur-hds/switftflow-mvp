@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.arthursouza.swiftflowMVP.models.Relations.Disponibility;
+
 import com.arthursouza.swiftflowMVP.models.dto.DisponibilityDTO.DisponibilityCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.DisponibilityDTO.DisponibilityUpdateDTO;
 import com.arthursouza.swiftflowMVP.services.Relations.DisponibilityService;
@@ -57,6 +58,16 @@ public class DisponibilityController {
 
 
     }
+    
+
+    @GetMapping("/request/provider/{id}")
+    public ResponseEntity<List<Disponibility>> findAllDisponibilitiesWithRequests(@Valid @PathVariable Long id){
+        List<Disponibility> disponibilities = this.disponibilityService.findAllDisponibilitiesWithRequests(id);
+        
+        return ResponseEntity.ok().body(disponibilities);
+        
+    }
+
 
 
 

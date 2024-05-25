@@ -50,6 +50,16 @@ public class DisponibilityService {
     }
 
 
+    public List<Disponibility> findAllDisponibilitiesWithRequests(Long id){
+        List<Disponibility> disponibilities = this.disponibilityRepository.findAllDisponibilitiesWithRequests(id);
+
+        return disponibilities;
+
+
+    }
+
+
+
 
 
 
