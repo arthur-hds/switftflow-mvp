@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.arthursouza.swiftflowMVP.models.Relations.Disponibility;
 import com.arthursouza.swiftflowMVP.models.Relations.OrderClient;
 import com.arthursouza.swiftflowMVP.models.dto.OrderClientDTO.OrderClientCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.OrderClientDTO.OrderClientUpdateDTO;
@@ -27,21 +28,19 @@ import jakarta.validation.Valid;
 @RequestMapping("/orderClient")
 @Validated
 public class OrderClientController {
-    
+
     @Autowired
     private OrderClientService orderClientService;
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<OrderClient> findById(@Valid @PathVariable Long id){
+    public ResponseEntity<OrderClient> findById(@Valid @PathVariable Long id) {
         OrderClient orderClient = this.orderClientService.findById(id);
 
         return ResponseEntity.ok().body(orderClient);
     }
 
-
     @GetMapping
-    public ResponseEntity<List<OrderClient>> findAllOrderClient(){
+    public ResponseEntity<List<OrderClient>> findAllOrderClient() {
         List<OrderClient> orderClients = this.orderClientService.findAllOrderClient();
 
         return ResponseEntity.ok().body(orderClients);
@@ -49,32 +48,37 @@ public class OrderClientController {
     }
 
     @GetMapping("/client/{id}")
-    public ResponseEntity<List<OrderClient>> findAllClientsOrderClient(@Valid @PathVariable Long id){
+    public ResponseEntity<List<OrderClient>> findAllClientsOrderClient(@Valid @PathVariable Long id) {
         List<OrderClient> orderClients = this.orderClientService.findAllClientsOrderClient(id);
 
         return ResponseEntity.ok().body(orderClients);
 
+    }
+
+    @GetMapping("/disponibility/provider/{id}")
+    public ResponseEntity<List<OrderClient>> findAllDisponibilitiesWithRequests(@Valid @PathVariable Long id) {
+        List<OrderClient> orderClients = this.orderClientService.findAllDisponibilitiesWithRequests(id);
+
+        return ResponseEntity.ok().body(orderClients);
 
     }
 
-
-    //CRUD METHODS
+    // CRUD METHODS
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody OrderClientCreateDTO obj){
+    public ResponseEntity<Void> create(@Valid @RequestBody OrderClientCreateDTO obj) {
         OrderClient orderClient = this.orderClientService.fromDTO(obj);
 
         this.orderClientService.create(orderClient);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-        .path("/{id}").buildAndExpand(orderClient.getId()).toUri();
+                .path("/{id}").buildAndExpand(orderClient.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
 
-
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody OrderClientUpdateDTO obj, @Valid @PathVariable Long id){
+    public ResponseEntity<Void> update(@Valid @RequestBody OrderClientUpdateDTO obj, @Valid @PathVariable Long id) {
         OrderClient orderClient = this.orderClientService.fromDTO(obj, id);
 
         orderClient.setId(id);
@@ -83,15 +87,12 @@ public class OrderClientController {
         return ResponseEntity.noContent().build();
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@Valid @PathVariable Long id){
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         this.orderClientService.delete(id);
 
         return ResponseEntity.noContent().build();
 
     }
-
-
 
 }

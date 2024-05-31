@@ -18,7 +18,7 @@ function changeWindow(){
 async function providerSelected(value){
 
     const providerID = value.target.value
-    const url = "http://localhost:8080/disponibility/provider/"+providerID
+    const url = "http://localhost:8080/orderClient/disponibility/provider/"+providerID
     const data = await getApi(url)
 
     let tab = ``
@@ -31,8 +31,14 @@ async function providerSelected(value){
             "season": value.shirt_id.season
         }
 
+        const user = {
+            "name": value.client_id.name
+        }
+
+
         tab += `
         <div class="providers">
+            <h2>${user.name}</h2>
             <h4>${shirt.team} - ${shirt.type} - ${shirt.season}</h4>
         </div>
         `
@@ -63,9 +69,11 @@ async function providerSelected(value){
     for (let i of items){
 
         i.addEventListener("click", function(){
-    
+            
+            
             console.log(i.innerText)
             moveToSelected(i)
+            i.remove()      //!I need to somehow register the object in the right container. That way, when it is clicked, the option will return to the left.
             
 
         })

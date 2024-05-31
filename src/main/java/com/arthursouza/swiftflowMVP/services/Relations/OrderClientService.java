@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.arthursouza.swiftflowMVP.models.Relations.Disponibility;
 import com.arthursouza.swiftflowMVP.models.Relations.OrderClient;
 import com.arthursouza.swiftflowMVP.models.dto.OrderClientDTO.OrderClientCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.OrderClientDTO.OrderClientUpdateDTO;
@@ -45,6 +46,14 @@ public class OrderClientService {
         List<OrderClient> orderClients = this.orderClientRepository.findAllClientsOrderClient(id);
 
         return orderClients;
+
+    }
+
+    public List<OrderClient> findAllDisponibilitiesWithRequests(Long id){
+        List<OrderClient> disponibilities = this.orderClientRepository.findAllDisponibilitiesWithRequests(id);
+
+        return disponibilities;
+
 
     }
 
