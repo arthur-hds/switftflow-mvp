@@ -18,7 +18,7 @@ public interface DisponibilityRepository extends JpaRepository<Disponibility, Lo
     @Query(value = "SELECT * FROM disponibility d where d.provider_id = :id", nativeQuery = true)
     List<Disponibility> findAllProvidersDisponibilities(@Param("id") Long id);
 
-    @Query(value = "SELECT distinct d.*, oc.client_id FROM disponibility d, order_client oc INNER JOIN order_client oc ON d.shirt_id = oc.shirt_id WHERE d.provider_id = :id", nativeQuery = true)
+    @Query(value = "SELECT distinct d.* FROM disponibility d INNER JOIN order_client oc ON d.shirt_id = oc.shirt_id WHERE d.provider_id = :id", nativeQuery = true)
     List<Disponibility> findAllDisponibilitiesWithRequests(@Param("id") Long id);
 
 }
