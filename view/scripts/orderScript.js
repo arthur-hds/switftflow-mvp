@@ -87,7 +87,6 @@ async function providerSelected(value) {
 
 
 async function moveToSelected(row, url) {
-
     
     const data = await getApi(url)
 
@@ -121,7 +120,7 @@ async function moveToSelected(row, url) {
             <div class="providers">
                 <h2>${order_client.tittle}</h2>
                 <h4 id="${shirt.team}-${shirt.id}">${shirt.team} - ${shirt.type} - ${shirt.season}</h4>
-                <div>
+                <div class="providers__price">
                     <h4 id="${shirt.team}-${shirt.id}">Price: R$${shirt.price}</h4>
                     <h4 id="${shirt.team}-${shirt.id}">Revenue: R$${shirt.revenue}</h4>
                 </div> 
