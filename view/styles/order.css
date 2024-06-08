@@ -68,14 +68,23 @@ body{
     flex: 0 0 auto; 
     text-align: start;
     color: #e7e7e7;
+
+    display: flex;
+    flex-direction: column; /* Disposição vertical */
+    gap: 20px; /* Espaço entre as divs */
     
 }
 
 
 .headers-tittle__elements__price{
-    flex: 0 0 auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
     text-align: end;
     color: #e7e7e7;
+
+    
   
     
 }
@@ -86,7 +95,7 @@ body{
     gap: 10px;
 }
 
-.headers-tittle__elements__price__cost h4{
+.headers-tittle__elements__price__cost h4,  h3{
     margin-left: auto
 }
 

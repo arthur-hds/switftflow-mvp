@@ -1,3 +1,12 @@
+//--------------Global Variables--------------
+
+let SelectedList = []
+
+//--------------------------------------------
+
+
+
+
 //--------------Function to get the JSON data--------------
 async function getApi(url) {
     const response = await fetch(url, {
@@ -24,6 +33,7 @@ async function providerSelected(value) {
     const data = await getApi(url)
 
     let tab = ``
+    SelectedList = []
 
     function loadUpDisponibilty(value) {
 
@@ -86,6 +96,7 @@ async function providerSelected(value) {
 }
 
 
+//--------------Transfer data to selected camp--------------
 async function moveToSelected(row, url) {
     
     const data = await getApi(url)
@@ -98,6 +109,24 @@ async function moveToSelected(row, url) {
 
     }
 
+
+    function loadUpSelected(shirtJson){
+        
+        tab = `
+        <div class="providers">
+            <h2>${order_client.tittle}</h2>
+            <h4 id="${shirtJson.team}-${shirtJson.id}">${shirtJson.team} - ${shirtJson.type} - ${shirtJson.season}</h4>
+            <div class="providers__price">
+                <h4 id="${shirtJson.team}-${shirtJson.id}">Price: R$${shirtJson.price}</h4>
+                <h4 id="${shirtJson.team}-${shirtJson.id}">Revenue: R$${shirtJson.revenue}</h4>
+            </div> 
+            
+        </div>
+
+        `
+    }
+
+
     let tab =``
 
 
@@ -107,7 +136,8 @@ async function moveToSelected(row, url) {
 
         if (i.shirt_id.id === order_client.shirt_id) {  //Checks if the id of the disponibility matches the request
 
-            const shirt = {
+
+            const shirtJson = {
                 "team": i.shirt_id.team_id.name,
                 "type": i.shirt_id.type,
                 "season": i.shirt_id.season,
@@ -116,30 +146,54 @@ async function moveToSelected(row, url) {
                 "revenue": i.sale
             }
 
-            tab = `
-            <div class="providers">
-                <h2>${order_client.tittle}</h2>
-                <h4 id="${shirt.team}-${shirt.id}">${shirt.team} - ${shirt.type} - ${shirt.season}</h4>
-                <div class="providers__price">
-                    <h4 id="${shirt.team}-${shirt.id}">Price: R$${shirt.price}</h4>
-                    <h4 id="${shirt.team}-${shirt.id}">Revenue: R$${shirt.revenue}</h4>
-                </div> 
-                
-            </div>
 
-            `
+            SelectedList.push(shirtJson)  //It declares the values from the object into a list
+
+            loadUpSelected(shirtJson)
+
+
+
+
                     
         }
 
             
     }
 
+    let priceSum = 0;
+
+    let profitSum = 0;
+
+    let totalSum;
 
 
-   
+  
+
+    for(let i of SelectedList){  //Add the total values to variable
+
+        priceSum += i.price;
+        profitSum += i.revenue;
+
+    }
+
+    totalSum = (profitSum - priceSum).toFixed();
+    
+
+
+
+
+
+
+    const price = document.getElementById("price__cost");
+    const profit = document.getElementById("price__profit");
+    const total = document.getElementById("price__total");
 
     const selected = document.getElementById("items-right-container")
-    selected.innerHTML += tab
+    selected.innerHTML += tab; 
+
+    price.textContent = "R$ "+ priceSum; 
+    profit.textContent = "R$ "+profitSum;
+    total.textContent = "R$ "+totalSum
 
 }
 
@@ -153,6 +207,7 @@ async function loadUpOptions() {
     const url = "http://localhost:8080/provider"
     const values = await getApi(url)
     let tab = ""
+    
 
 
     function setOptions(object) {
