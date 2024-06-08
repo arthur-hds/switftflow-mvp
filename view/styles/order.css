@@ -76,12 +76,19 @@ body{
     flex: 0 0 auto; 
     text-align: end;
     color: #e7e7e7;
+  
     
-
-
 }
 
+.headers-tittle__elements__price__cost{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
 
+.headers-tittle__elements__price__cost h4{
+    margin-left: auto
+}
 
 
 
