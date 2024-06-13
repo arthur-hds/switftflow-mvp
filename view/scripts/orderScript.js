@@ -1,6 +1,7 @@
 //--------------Global Variables--------------
 
-let SelectedList = []
+let SelectedList = [];
+let tab = ``;
 
 //--------------------------------------------
 
@@ -23,18 +24,23 @@ function changeWindow() {
     window.location = "index.html";
 }
 
+//--------------Function to load shirts that are disponible--------------
+
+
 
 //--------------Function to set all the disponibilities at the selected provider--------------
 async function providerSelected(value) {
 
     const providerID = value.target.value
     const url = "http://localhost:8080/orderClient/disponibility/provider/" + providerID
+    const urlProvider = "http://localhost:8080/provider/" + providerID
     const urlDisponibilty = "http://localhost:8080/disponibility/request/provider/" + providerID
     const data = await getApi(url)
 
-    let tab = ``
+    tab = ``
     SelectedList = []
 
+    //--------------Function to load shirts that are disponible--------------
     function loadUpDisponibilty(value) {
 
         const shirt = {
@@ -59,19 +65,37 @@ async function providerSelected(value) {
 
     }
 
-    for (let i of data) {
+    //--------------Function to load minimum shirts per provider--------------
+    async function loadUpMinimumShirts() {
 
-        loadUpDisponibilty(i)
+        const provider = await getApi(urlProvider);
+
+        const providerMinimum = provider.minimum;
+
+        return providerMinimum;
+
+
     }
 
 
+    for (let i of data) {
 
+        loadUpDisponibilty(i)
+
+    }
+
+
+    const providerMinimum = await loadUpMinimumShirts()
+
+
+
+    const miniumShirts = document.getElementById("item-minimum-info")
     const disponibilities = document.getElementById("items-left-container")
     const selected = document.getElementById("items-right-container")
 
     selected.innerHTML = ``
     disponibilities.innerHTML = tab
-
+    miniumShirts.textContent = providerMinimum
 
 
     const items = document.getElementsByClassName("providers")
@@ -98,7 +122,7 @@ async function providerSelected(value) {
 
 //--------------Transfer data to selected camp--------------
 async function moveToSelected(row, url) {
-    
+
     const data = await getApi(url)
 
     const order_client = {
@@ -110,8 +134,8 @@ async function moveToSelected(row, url) {
     }
 
 
-    function loadUpSelected(shirtJson){
-        
+    function loadUpSelected(shirtJson) {
+
         tab = `
         <div class="providers">
             <h2>${order_client.tittle}</h2>
@@ -127,17 +151,17 @@ async function moveToSelected(row, url) {
     }
 
 
-    let tab =``
+    tab = ``
 
-
+    let shirtJSON = {};
 
     for (let i of data) {
-  
+
 
         if (i.shirt_id.id === order_client.shirt_id) {  //Checks if the id of the disponibility matches the request
 
 
-            const shirtJson = {
+            shirtJSON = {
                 "team": i.shirt_id.team_id.name,
                 "type": i.shirt_id.type,
                 "season": i.shirt_id.season,
@@ -147,17 +171,17 @@ async function moveToSelected(row, url) {
             }
 
 
-            SelectedList.push(shirtJson)  //It declares the values from the object into a list
+            SelectedList.push(shirtJSON)  //It declares the values from the object into a list
 
-            loadUpSelected(shirtJson)
-
-
+            loadUpSelected(shirtJSON)
 
 
-                    
+
+
+
         }
 
-            
+
     }
 
     let priceSum = 0;
@@ -167,9 +191,9 @@ async function moveToSelected(row, url) {
     let totalSum;
 
 
-  
 
-    for(let i of SelectedList){  //Add the total values to variable
+
+    for (let i of SelectedList) {  //Add the total values to variable
 
         priceSum += i.price;
         profitSum += i.revenue;
@@ -177,25 +201,32 @@ async function moveToSelected(row, url) {
     }
 
     totalSum = (profitSum - priceSum).toFixed();
-    
 
 
 
 
 
 
+    const selectedShirts = document.getElementById("item-selected-info");
     const price = document.getElementById("price__cost");
     const profit = document.getElementById("price__profit");
     const total = document.getElementById("price__total");
 
     const selected = document.getElementById("items-right-container")
-    selected.innerHTML += tab; 
 
-    price.textContent = "R$ "+ priceSum; 
-    profit.textContent = "R$ "+profitSum;
-    total.textContent = "R$ "+totalSum
+
+    selected.innerHTML += tab;
+
+    selectedShirts.textContent = SelectedList.length
+    price.textContent = "R$ " + priceSum;
+    profit.textContent = "R$ " + profitSum;
+    total.textContent = "R$ " + totalSum
+
+
 
 }
+
+
 
 
 
@@ -206,8 +237,8 @@ async function moveToSelected(row, url) {
 async function loadUpOptions() {
     const url = "http://localhost:8080/provider"
     const values = await getApi(url)
-    let tab = ""
-    
+    tab = ``
+
 
 
     function setOptions(object) {
@@ -226,6 +257,7 @@ async function loadUpOptions() {
 
 
 }
+
 loadUpOptions()
 
 
