@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.arthursouza.swiftflowMVP.models.Relations.Disponibility;
 
 @Repository
-public interface DisponibilityRepository extends JpaRepository<Disponibility, Long>{
-    
+public interface DisponibilityRepository extends JpaRepository<Disponibility, Long> {
+
     @Query(value = "SELECT * FROM disponibility", nativeQuery = true)
     List<Disponibility> findAllDisponibilities();
 

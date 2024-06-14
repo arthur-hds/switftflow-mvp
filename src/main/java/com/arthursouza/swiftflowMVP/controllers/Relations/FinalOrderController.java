@@ -68,8 +68,8 @@ public class FinalOrderController {
     }
 
 
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@Valid Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id){
         this.finalOrderService.delete(id);
 
         return ResponseEntity.noContent().build();
