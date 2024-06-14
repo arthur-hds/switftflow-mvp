@@ -93,11 +93,44 @@
     </div>
 
 
+
+    <!-- Create the error modal -->
+    <div id="error-modal" class="modal-div">
+        
+        <div class="modal-div-content">
+
+            <div class="modal-header-div-content">
+
+
+                <i class="bi bi-exclamation-triangle-fill" style="font-size: 10rem; color: black;"></i>
+                <h2 id="tittle-modal">Error in adding shirts</h2>
+
+                
+
+            </div>
+
+            <div id="modal-body" class="modal-body-div-content">
+
+
+                <h4 id="content-modal">
+                    You have to add more <u id="dynamic-value">10</u> shirts.
+                </h4>
+
+            </div>
+
+            <div class="modal-footer-div-content">
+
+                <button id="btn-close" class="btn-add" onclick="showModal()">Close</button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
      <!-- Content -->
-     <div class="body-content-div">
-
-
-       
+     <div class="body-content-div">      
 
         
 
@@ -180,7 +213,7 @@
 
             <div class="btn-div">
 
-                <button id="btn-create" class="btn-add" >Criar</button>
+                <button id="btn-create" class="btn-add" onclick="checkQuantity()">Criar</button>
 
             </div>
 

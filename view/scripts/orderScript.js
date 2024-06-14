@@ -211,7 +211,6 @@ async function moveToSelected(row, url) {
     const price = document.getElementById("price__cost");
     const profit = document.getElementById("price__profit");
     const total = document.getElementById("price__total");
-
     const selected = document.getElementById("items-right-container")
 
 
@@ -257,6 +256,44 @@ async function loadUpOptions() {
 
 
 }
+
+
+
+
+//--------------Function that checks if the minimum required shirts have been selected--------------
+function checkQuantity(){
+
+    const selectedShirts = document.getElementById("item-selected-info");
+    const miniumShirts = document.getElementById("item-minimum-info")
+
+    const minimum = miniumShirts.textContent;
+    const selected = selectedShirts.textContent;
+
+    if( selected < minimum ){
+        showModal()
+    }
+
+
+
+}
+
+
+function showModal(){
+
+    const modal = document.getElementById("error-modal");
+    console.log(modal.style.display)
+
+    if(modal.style.display === ""){
+
+        modal.style.display = "none";
+
+    }else if(modal.style.display === "none"){
+
+        modal.style.display = "";
+
+    }
+}
+
 
 loadUpOptions()
 
