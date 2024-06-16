@@ -21,7 +21,9 @@ async function getApi(url) {
 
 //--------------Function to change HTML when back arrow pressed--------------
 function changeWindow() {
-    window.location = "index.html";
+
+    
+    window.location.href = "index.html";
 }
 
 //--------------Function to load shirts that are disponible--------------
@@ -269,19 +271,34 @@ function checkQuantity(){
     const minimum = miniumShirts.textContent;
     const selected = selectedShirts.textContent;
 
-    if( selected < minimum ){
-        showModal()
+    const IsMinimum = selected < minimum
+
+    if( IsMinimum ){
+        showModal();
+        return;
     }
 
+    
+    sendData();
+  
 
 
 }
 
 
+function sendData(){
+
+    sessionStorage.setItem("Orders", JSON.stringify(SelectedList));
+
+}
+
+
+
+
 function showModal(){
 
     const modal = document.getElementById("error-modal");
-    console.log(modal.style.display)
+ 
 
     if(modal.style.display === "block"){
 
@@ -293,6 +310,7 @@ function showModal(){
 
     }
 }
+
 
 
 loadUpOptions()
