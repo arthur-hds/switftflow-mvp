@@ -20,10 +20,10 @@ async function getApi(url) {
 }
 
 //--------------Function to change HTML when back arrow pressed--------------
-function changeWindow() {
+function changeWindow(page) {
 
     
-    window.location.href = "index.html";
+    window.location.href = `${page}.html`;
 }
 
 //--------------Function to load shirts that are disponible--------------
@@ -285,7 +285,7 @@ function checkQuantity(){
 
 }
 
-
+//--------------Function to save all selected items to be used at the review page--------------
 function sendData(){
 
     sessionStorage.setItem("Orders", JSON.stringify(SelectedList));
