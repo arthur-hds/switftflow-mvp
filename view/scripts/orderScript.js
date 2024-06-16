@@ -140,7 +140,7 @@ async function moveToSelected(row, url) {
 
         tab = `
         <div class="providers">
-            <h2>${order_client.tittle}</h2>
+            <h2>${shirtJson.tittle}</h2>
             <h4 id="${shirtJson.team}-${shirtJson.id}">${shirtJson.team} - ${shirtJson.type} - ${shirtJson.season}</h4>
             <div class="providers__price">
                 <h4 id="${shirtJson.team}-${shirtJson.id}">Price: R$${shirtJson.price}</h4>
@@ -164,6 +164,7 @@ async function moveToSelected(row, url) {
 
 
             shirtJSON = {
+                "client": order_client.tittle,
                 "team": i.shirt_id.team_id.name,
                 "type": i.shirt_id.type,
                 "season": i.shirt_id.season,
@@ -280,7 +281,7 @@ function checkQuantity(){
 
     
     sendData();
-  
+    
 
 
 }
@@ -289,6 +290,7 @@ function checkQuantity(){
 function sendData(){
 
     sessionStorage.setItem("Orders", JSON.stringify(SelectedList));
+    changeWindow("orderCheckup")
 
 }
 
