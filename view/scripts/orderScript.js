@@ -274,7 +274,22 @@ function checkQuantity(){
 
     const IsMinimum = selected < minimum
 
+
+    function updateRemainingText(){
+
+        const remaining = minimum - selected;
+
+
+        
+        const remainingText = document.getElementById("remaining-text");
+        remainingText.innerText = remaining;
+
+    }
+
+
+
     if( IsMinimum ){
+        updateRemainingText()
         showModal();
         return;
     }
