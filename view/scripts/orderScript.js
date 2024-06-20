@@ -1,6 +1,7 @@
 //--------------Global Variables--------------
 
 let SelectedList = [];
+let nameList = [];
 let tab = ``;
 
 //--------------------------------------------
@@ -140,7 +141,7 @@ async function moveToSelected(row, url) {
 
         tab = `
         <div class="providers">
-            <h2>${shirtJson.tittle}</h2>
+            <h2>${shirtJson.client}</h2>
             <h4 id="${shirtJson.team}-${shirtJson.id}">${shirtJson.team} - ${shirtJson.type} - ${shirtJson.season}</h4>
             <div class="providers__price">
                 <h4 id="${shirtJson.team}-${shirtJson.id}">Price: R$${shirtJson.price}</h4>
@@ -195,11 +196,19 @@ async function moveToSelected(row, url) {
 
 
 
-
     for (let i of SelectedList) {  //Add the total values to variable
 
         priceSum += i.price;
         profitSum += i.revenue;
+
+        if (nameList.length === 0){  //Identifies unique values of the clients at all orders
+            nameList.push(i.client)
+        } else if (!nameList.includes(i.client)){ 
+            nameList.push(i.client)
+            
+        }
+
+   
 
     }
 
@@ -305,7 +314,8 @@ function checkQuantity(){
 function sendData(){
 
     sessionStorage.setItem("Orders", JSON.stringify(SelectedList));
-    changeWindow("orderCheckup")
+    sessionStorage.setItem("Clients", JSON.stringify(nameList));
+    changeWindow("orderCheckup");
 
 }
 
