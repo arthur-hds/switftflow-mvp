@@ -2,6 +2,11 @@
 
 let SelectedList = [];
 let nameList = [];
+let Values = {
+    "cost": 0,
+    "profit": 0,
+    "additional": 0
+}
 let tab = ``;
 
 //--------------------------------------------
@@ -171,7 +176,8 @@ async function moveToSelected(row, url) {
                 "season": i.shirt_id.season,
                 "id": i.shirt_id.id,
                 "price": i.price,
-                "revenue": i.sale
+                "revenue": i.sale,
+                "provider": i.provider_id.name
             }
 
 
@@ -215,6 +221,9 @@ async function moveToSelected(row, url) {
     totalSum = (profitSum - priceSum).toFixed();
 
 
+
+    Values.cost = priceSum;
+    Values.profit = profitSum;
 
 
 
@@ -315,6 +324,7 @@ function sendData(){
 
     sessionStorage.setItem("Orders", JSON.stringify(SelectedList));
     sessionStorage.setItem("Clients", JSON.stringify(nameList));
+    sessionStorage.setItem("Values", JSON.stringify(Values));
     changeWindow("orderCheckup");
 
 }

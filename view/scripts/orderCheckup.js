@@ -1,6 +1,7 @@
 //--------------Global Variables--------------
 
 let SelectedList = [];
+let ClientsList = [];
 let tab = ``;
 
 //--------------------------------------------
@@ -10,6 +11,10 @@ let tab = ``;
 function getData(){
 
     SelectedList = JSON.parse(sessionStorage.getItem("Orders"));
+    ClientsList = JSON.parse(sessionStorage.getItem("Clients"));
+    Values = JSON.parse(sessionStorage.getItem("Values"));
+    
+    console.log(ClientsList[0])
 
 }
 
@@ -61,5 +66,29 @@ function loadUpOrder(data){
 
 }
 
+
+
+//--------------Function to set details of the main order--------------
+function loadUpDetails() {
+    const clientsText = document.getElementById("clientsQuantity");
+    const shirtsText = document.getElementById("shirtsQuantity");
+    const providerText = document.getElementById("provider");
+    const costText = document.getElementById("costValue");
+    const profitText = document.getElementById("profitValue");
+
+
+    costText.textContent = "R$ "+Values.cost;
+    profitText.textContent = "R$ "+Values.profit
+    providerText.textContent = SelectedList[0].provider;
+    shirtsText.textContent = SelectedList.length;
+    clientsText.textContent = ClientsList.length;
+
+}
+
+
+
+
+
 getData();
 loadUpOrder(SelectedList);
+loadUpDetails();
