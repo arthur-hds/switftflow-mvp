@@ -15,40 +15,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.arthursouza.swiftflowMVP.models.Relations.FinalOrder;
-import com.arthursouza.swiftflowMVP.models.dto.FinalOrderDTO.FinalOrderCreateDTO;
-import com.arthursouza.swiftflowMVP.models.dto.FinalOrderDTO.FinalOrderUpdateDTO;
-import com.arthursouza.swiftflowMVP.services.Relations.FinalOrderService;
+import com.arthursouza.swiftflowMVP.models.Relations.OrderItem;
+import com.arthursouza.swiftflowMVP.models.dto.OrderItemDTO.OrderItemCreateDTO;
+import com.arthursouza.swiftflowMVP.models.dto.OrderItemDTO.OrderItemUpdateDTO;
+import com.arthursouza.swiftflowMVP.services.Relations.OrderItemService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/finalOrder")
+@RequestMapping("/OrderItem")
 @Validated
-public class FinalOrderController {
+public class OrderItemController {
     
     @Autowired
-    private FinalOrderService finalOrderService;
+    private OrderItemService orderItemService;
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<FinalOrder> findById(@Valid @PathVariable Long id){
-        FinalOrder finalOrder = this.finalOrderService.findById(id);
+    public ResponseEntity<OrderItem> findById(@Valid @PathVariable Long id){
+        OrderItem orderItem = this.orderItemService.findById(id);
 
-        return ResponseEntity.ok().body(finalOrder);
+        return ResponseEntity.ok().body(orderItem);
 
     }
 
     //CRUD METHODS
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody FinalOrderCreateDTO obj){
-        FinalOrder finalOrder = this.finalOrderService.fromDTO(obj);
+    public ResponseEntity<Void> create(@Valid @RequestBody OrderItemCreateDTO obj){
+        OrderItem orderItem = this.orderItemService.fromDTO(obj);
 
-        this.finalOrderService.create(finalOrder);
+        this.orderItemService.create(orderItem);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
-        path("{id}").buildAndExpand(finalOrder.getId()).toUri();
+        path("{id}").buildAndExpand(orderItem.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
 
@@ -56,11 +56,11 @@ public class FinalOrderController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody FinalOrderUpdateDTO obj, @Valid @PathVariable Long id){
-        FinalOrder finalOrder = this.finalOrderService.fromDTO(obj);
+    public ResponseEntity<Void> update(@Valid @RequestBody OrderItemUpdateDTO obj, @Valid @PathVariable Long id){
+        OrderItem orderItem = this.orderItemService.fromDTO(obj);
 
-        finalOrder.setId(id);
-        this.finalOrderService.update(finalOrder);
+        orderItem.setId(id);
+        this.orderItemService.update(orderItem);
 
         return ResponseEntity.noContent().build();
 
@@ -70,7 +70,7 @@ public class FinalOrderController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@Valid @PathVariable Long id){
-        this.finalOrderService.delete(id);
+        this.orderItemService.delete(id);
 
         return ResponseEntity.noContent().build();
 

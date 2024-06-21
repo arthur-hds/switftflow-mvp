@@ -6,7 +6,6 @@ import java.util.Set;
 import com.arthursouza.swiftflowMVP.models.Provider;
 import com.arthursouza.swiftflowMVP.models.Shirt;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +17,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -60,7 +58,7 @@ public class Disponibility {
 
     @JsonBackReference
     @ManyToMany(mappedBy = "disponibility")
-    private Set<FinalOrder> orders = new HashSet<>();
+    private Set<OrderItem> orders = new HashSet<>();
 
 
 }

@@ -19,13 +19,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = FinalOrder.TABLE_NAME)
+@Table(name = OrderItem.TABLE_NAME)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FinalOrder {
+public class OrderItem {
     
-    public static final String TABLE_NAME = "FinalOrder";
+    public static final String TABLE_NAME = "OrderItem";
 
 
     @Id
@@ -46,17 +46,6 @@ public class FinalOrder {
     @JoinColumn(name = "orderClient_id", nullable = false)
     private OrderClient orderClient;
 
-    @Column(name = "cost", nullable = false)
-    @NotNull
-    private Double cost;
-
-    @Column(name = "profit", nullable = false)
-    @NotNull
-    private Double profit;
-
-    @Column(name = "total", nullable = false)
-    @NotNull
-    private Double total;
 
 
 
