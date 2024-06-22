@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.arthursouza.swiftflowMVP.models.Relations.Disponibility;
 import com.arthursouza.swiftflowMVP.models.Relations.OrderClient;
+import com.arthursouza.swiftflowMVP.models.Relations.Orders;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class OrderItemUpdateDTO {
 
     private OrderClient orderClient;
 
+    private Orders orders_id;
 
 
 

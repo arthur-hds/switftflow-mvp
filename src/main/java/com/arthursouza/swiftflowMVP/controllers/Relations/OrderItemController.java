@@ -23,7 +23,7 @@ import com.arthursouza.swiftflowMVP.services.Relations.OrderItemService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/OrderItem")
+@RequestMapping("/orderItem")
 @Validated
 public class OrderItemController {
     
@@ -48,7 +48,7 @@ public class OrderItemController {
         this.orderItemService.create(orderItem);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
-        path("{id}").buildAndExpand(orderItem.getId()).toUri();
+        path("/{id}").buildAndExpand(orderItem.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
 

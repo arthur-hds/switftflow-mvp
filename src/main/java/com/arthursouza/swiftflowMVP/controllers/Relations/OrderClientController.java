@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.arthursouza.swiftflowMVP.models.Relations.Disponibility;
 import com.arthursouza.swiftflowMVP.models.Relations.OrderClient;
 import com.arthursouza.swiftflowMVP.models.dto.OrderClientDTO.OrderClientCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.OrderClientDTO.OrderClientUpdateDTO;

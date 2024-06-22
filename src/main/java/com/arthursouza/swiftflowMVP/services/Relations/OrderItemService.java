@@ -43,7 +43,7 @@ public class OrderItemService {
     public OrderItem update(OrderItem orderItem){
         OrderItem newObj = findById(orderItem.getId());
 
-        
+        newObj.setOrders(orderItem.getOrders());
         newObj.setDisponibility(orderItem.getDisponibility());
         newObj.setOrderClient(orderItem.getOrderClient());
         
@@ -68,6 +68,7 @@ public class OrderItemService {
 
     public OrderItem fromDTO(@Valid OrderItemCreateDTO obj){
         OrderItem orderItem = new OrderItem();
+        orderItem.setOrders(obj.getOrders_id());
         orderItem.setDisponibility(obj.getDisponibility());
         orderItem.setOrderClient(obj.getOrderClient());
 
@@ -80,6 +81,7 @@ public class OrderItemService {
         OrderItem orderItem = new OrderItem();
 
         orderItem.setId(obj.getId());
+        orderItem.setOrders(obj.getOrders_id());
         orderItem.setDisponibility(obj.getDisponibility());
         orderItem.setOrderClient(obj.getOrderClient());
 
