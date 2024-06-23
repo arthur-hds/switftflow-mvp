@@ -177,7 +177,8 @@ async function moveToSelected(row, url) {
                 "id": i.shirt_id.id,
                 "price": i.price,
                 "revenue": i.sale,
-                "provider": i.provider_id.name
+                "provider": i.provider_id.name,
+                "providerID": i.provider_id.id
             }
 
 

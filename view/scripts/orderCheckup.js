@@ -2,6 +2,7 @@
 
 let SelectedList = [];
 let ClientsList = [];
+let Values = []
 let tab = ``;
 
 //--------------------------------------------
@@ -86,6 +87,49 @@ function loadUpDetails() {
 }
 
 
+
+//--------------Function create main order--------------
+async function createOrder(){
+
+    const url = "http://localhost:8080/orders"
+
+    const AllParams ={
+
+        "status": false,
+        "total": Values.cost,
+        "provider_id": {"id": SelectedList[0].providerID}
+
+    } 
+
+
+    try {
+    
+        const response = await fetch(url, {
+
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(AllParams)
+    
+        })
+
+        if (!response.ok) {
+            throw new Error("Error in the process of sending data.");
+        }
+
+        const data = await response;
+        console.log("Success: ", data);
+
+
+    } catch (error) {
+
+        console.error("Erro: ", error);
+
+    }
+
+
+}
 
 
 
