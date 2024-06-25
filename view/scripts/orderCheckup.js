@@ -93,7 +93,7 @@ async function createOrder(){
 
     const url = "http://localhost:8080/orders"
 
-    const AllParams ={
+    const AllParams ={  //Interface and JSON to Order row
 
         "status": false,
         "total": Values.cost,
@@ -103,7 +103,7 @@ async function createOrder(){
 
 
     try {
-    
+        //!JSON conversion not working
         const response = await fetch(url, {
 
             method: "POST",
