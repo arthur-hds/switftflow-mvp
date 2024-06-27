@@ -20,7 +20,7 @@ public class OrderItemUpdateDTO {
     private Long id;
 
 
-    private Set<Disponibility> disponibility = new HashSet<>();
+    private Disponibility disponibility_id;
 
     private OrderClient orderClient;
 

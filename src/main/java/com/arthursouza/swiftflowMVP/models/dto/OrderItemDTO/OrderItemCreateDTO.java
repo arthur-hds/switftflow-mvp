@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderItemCreateDTO {
  
-    private Set<Disponibility> disponibility = new HashSet<>();
+    private Disponibility disponibility_id;
 
     
     private OrderClient orderClient;

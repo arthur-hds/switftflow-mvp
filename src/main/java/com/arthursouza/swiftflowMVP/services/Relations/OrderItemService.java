@@ -77,7 +77,7 @@ public class OrderItemService {
     public OrderItem fromDTO(@Valid OrderItemCreateDTO obj){
         OrderItem orderItem = new OrderItem();
         orderItem.setOrders(obj.getOrders_id());
-        orderItem.setDisponibility(obj.getDisponibility());
+        orderItem.setDisponibility(obj.getDisponibility_id());
         orderItem.setOrderClient(obj.getOrderClient());
 
         return orderItem;
@@ -90,7 +90,7 @@ public class OrderItemService {
 
         orderItem.setId(obj.getId());
         orderItem.setOrders(obj.getOrders_id());
-        orderItem.setDisponibility(obj.getDisponibility());
+        orderItem.setDisponibility(obj.getDisponibility_id());
         orderItem.setOrderClient(obj.getOrderClient());
 
         return orderItem;

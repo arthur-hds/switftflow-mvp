@@ -11,4 +11,6 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long>{
     @Query(value = "SELECT * FROM order_item ORDER BY id DESC LIMIT 1", nativeQuery = true)
     OrderItem findLastOrder();
 
+    
+
 }

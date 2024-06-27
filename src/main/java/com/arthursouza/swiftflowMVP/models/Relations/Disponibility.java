@@ -56,9 +56,5 @@ public class Disponibility {
     @NotNull
     private Double sale;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "disponibility")
-    private Set<OrderItem> orders = new HashSet<>();
-
 
 }
