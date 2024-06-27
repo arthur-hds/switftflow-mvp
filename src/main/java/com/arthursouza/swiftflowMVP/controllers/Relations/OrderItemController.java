@@ -39,6 +39,15 @@ public class OrderItemController {
 
     }
 
+
+    @GetMapping("/latest")
+    public ResponseEntity<OrderItem> findLastOrder(){
+        OrderItem orderItem = this.orderItemService.findLastOrder();
+
+        return ResponseEntity.ok().body(orderItem);
+
+    }
+
     //CRUD METHODS
 
     @PostMapping

@@ -31,6 +31,14 @@ public class OrderItemService {
     }
 
 
+    public OrderItem findLastOrder(){
+        OrderItem orderItem = this.orderItemRepository.findLastOrder();
+
+        return orderItem;
+
+    }
+
+
     //CRUD METHODS
     @Transactional
     public OrderItem create(OrderItem orderItem){
