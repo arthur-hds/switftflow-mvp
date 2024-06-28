@@ -135,7 +135,7 @@ async function moveToSelected(row, url) {
 
     const order_client = {
         tittle: row.firstElementChild.id.split("-")[0],
-        id: row.firstElementChild.id.split("-")[1],
+        id: parseInt(row.firstElementChild.id.split("-")[1]),
         shirt_id: Number(row.lastElementChild.id.split("-")[1])
 
 
@@ -171,10 +171,12 @@ async function moveToSelected(row, url) {
 
             shirtJSON = {
                 "client": order_client.tittle,
+                "orderClientID": order_client.id ,
                 "team": i.shirt_id.team_id.name,
                 "type": i.shirt_id.type,
                 "season": i.shirt_id.season,
                 "id": i.shirt_id.id,
+                "disponibilityID": i.id,
                 "price": i.price,
                 "revenue": i.sale,
                 "provider": i.provider_id.name,
