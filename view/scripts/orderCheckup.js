@@ -101,7 +101,7 @@ function loadUpDetails() {
 
 
 //--------------Function create main order--------------
-async function createOrder() {
+async function createOrder() { //! Needs to create method that creates an order
 
     const url = "http://localhost:8080/orders"
 
@@ -146,7 +146,7 @@ async function createOrder() {
 
 async function createOrderItem() {
 
-    const url = "http://localhost:8080/orderItem/latest"
+    const url = "http://localhost:8080/orders/latest"
     const urlPost = "http://localhost:8080/orderItem"
     const latestCreatedOrder = await getApi(url);
 
