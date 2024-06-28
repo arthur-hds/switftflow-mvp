@@ -29,6 +29,15 @@ public class OrdersService {
 
 
     }
+    
+
+    public Orders findLastOrder(){
+        Orders orders = this.ordersRepository.findLastOrder();
+
+        return orders;
+
+
+    }
 
 
 
