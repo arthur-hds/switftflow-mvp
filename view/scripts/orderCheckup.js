@@ -101,7 +101,7 @@ function loadUpDetails() {
 
 
 //--------------Function create main order--------------
-async function createOrder() { //! Needs to create method that creates an order
+async function createOrder() {
 
     const url = "http://localhost:8080/orders"
 
@@ -144,6 +144,7 @@ async function createOrder() { //! Needs to create method that creates an order
 
 
 
+//--------------Function create each items of the order--------------
 async function createOrderItem() {
 
     const url = "http://localhost:8080/orders/latest"
@@ -200,6 +201,16 @@ async function createOrderItem() {
 
 
 
+
+}
+
+
+//--------------Function create both orders in sequence--------------
+async function createOrders(){
+
+    await createOrder();
+    await createOrderItem();
+    changeWindow('index');
 
 }
 
