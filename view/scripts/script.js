@@ -116,7 +116,7 @@ async function ChangeData(path){
     let data = await getAPI(url);
 
     
-    updateButtons(btn, btnCreateOrder)  // Shows the "add" button, while hiding the other one
+    updateButtons(btn, [btnCreateOrder, btnViewOrder])  // Shows the "add" button, while hiding the other one
    
 
     ChangeModalData(path)
@@ -228,7 +228,7 @@ async function changeDataOrder(){
     const JsonPath = [provider, orderClient]   //JSON's that will be used to 
     const DbPaths = ["disponibility/provider/", "orderClient/client/"]
     
-    updateButtons(btnCreateOrder, btn) // Shows the "Create order" button, while hiding the other one
+    updateButtons([btnCreateOrder, btnViewOrder], btn) // Shows the "Create order" button, while hiding the other one
 
 
     showOrder(JsonPath, DbPaths);
@@ -240,8 +240,13 @@ async function changeDataOrder(){
 
 
 function updateButtons(show, hide){  //It switch the values of buttons styles, to be displayed or not
+    
+    const IS_SHOW_ARRAY = Array.isArray(show);
+    const IS_HIDE_ARRAY = Array.isArray(hide)
+    
+    IS_SHOW_ARRAY ? show.forEach( value => value.style.display = "") : show.style.display = "";
+    IS_HIDE_ARRAY ? hide.forEach( value => value.style.display = "none") : hide.style.display = "none";    
 
-    [show.style.display, hide.style.display] = ["", "none"]
 
 }
 
@@ -309,6 +314,8 @@ const btnClose = document.getElementById("btn-close")
 const btnCreate = document.getElementById("btn-create")
 
 const btnCreateOrder = document.getElementById("btn-create-order")
+
+const btnViewOrder = document.getElementById("btn-view-order")
 
 function showModal(){
     if(modal.style.display === ""){
@@ -458,6 +465,7 @@ btn.addEventListener("click", showModal);
 btnClose.addEventListener("click", showModal);
 btnCreate.addEventListener("click", CreateData);
 btnCreateOrder.addEventListener("click", changeWindow)
+btnViewOrder.addEventListener("click", changeWindow)
 
 
 
