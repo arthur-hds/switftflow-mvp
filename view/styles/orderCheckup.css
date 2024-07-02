@@ -64,44 +64,6 @@ body{
 
 }
 
-.headers-tittle__elements__provider{
-    flex: 0 0 auto; 
-    text-align: start;
-    color: #e7e7e7;
-
-    display: flex;
-    flex-direction: column; /* Disposição vertical */
-    gap: 20px; /* Espaço entre as divs */
-    
-}
-
-
-.headers-tittle__elements__price{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    text-align: end;
-    color: #e7e7e7;
-
-    
-  
-    
-}
-
-.headers-tittle__elements__price__cost{
-    width: 100%;
-    display: flex;
-    gap: 10px;
-}
-
-.headers-tittle__elements__price__cost h4,  h3{
-    margin-left: auto
-}
-
-
-
-
 
 
 .--bs-body-font-size{

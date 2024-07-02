@@ -187,18 +187,6 @@ body{
 }
 
 
-.btn-create-order{
-    font-family: "Poppins", sans-serif !important;
-    margin-right: 12px;
-    background-color: #F8EBFF;
-    color: #453864;
-    padding: 5px 30px 5px 30px;
-    border: 1px solid #888;
-    
-
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    border-radius: 12px;
-}
 
 
 
