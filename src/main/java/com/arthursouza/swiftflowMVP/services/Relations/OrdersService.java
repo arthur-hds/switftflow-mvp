@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.services.Relations;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,13 @@ public class OrdersService {
 
 
     }
+
+
+    public List<Orders> findAllOrders(){
+        List<Orders> orders = this.ordersRepository.findAllOrders();
+        return orders;
+    }
+
 
 
 
