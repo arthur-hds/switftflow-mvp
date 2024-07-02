@@ -464,8 +464,12 @@ function ChangeModalData(path){
 btn.addEventListener("click", showModal);
 btnClose.addEventListener("click", showModal);
 btnCreate.addEventListener("click", CreateData);
-btnCreateOrder.addEventListener("click", changeWindow)
-btnViewOrder.addEventListener("click", changeWindow)
+btnCreateOrder.addEventListener("click", function(){
+    changeWindow("order");
+})
+btnViewOrder.addEventListener("click", function(){
+    changeWindow("viewOrder");
+})
 
 
 
@@ -548,9 +552,12 @@ async function CreateData(){
 
 
 
-function changeWindow(){
-    window.location = "order.html";
+//--------------Function to change HTML when back arrow pressed--------------
+function changeWindow(page) {
+
+    window.location.href = `${page}.html`;
 }
+
 
 
 
