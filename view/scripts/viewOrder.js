@@ -84,6 +84,7 @@ function show(data){
 
 }
 
+//--------------Function to pull the db content--------------
 async function getAPI(url){
 
     const response = await fetch(url, {     // Gets the response body
@@ -105,7 +106,7 @@ function changeWindow(page) {
 }
 
 
-
+//--------------Function to get the api value and pass to table--------------
 async function fetchDataAndShow() {
     try {
         const data = await getAPI(url + "orders");
