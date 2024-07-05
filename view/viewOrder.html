@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders</title>
+    <title>Review</title>
+
 
     <!-- GOOGLE FONTS ISN'T WORKING WELL WITH BOOTSTRAP LINKS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
     <!-- GOOGLE FONTS ISN'T WORKING WELL WITH BOOTSTRAP LINKS -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/view/styles/viewOrder.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles/viewOrder.css">
 
     <script src="scripts/viewOrder.js" defer></script>
 
-    
+
 
 </head>
+
 <body>
-    
-    <!-- Category buttons -->
+
+
     <div class="header-div">
+
 
         <div class="headers-arrow">
 
-            <div class="headers-arrow__icon" onclick="changeWindow('index')">
+            <div class="headers-arrow__icon" onclick="changeWindow('order')">
                 <i class="bi bi-arrow-left" style="font-size: 2rem; color: #F8EBFF;"></i>
 
             </div>
@@ -43,7 +45,7 @@
         <div class="headers-tittle">
 
             <div class="headers-tittle__text">
-                <h2>Orders</h2>
+                <h2>Review</h2>
             </div>
 
 
@@ -55,38 +57,118 @@
     </div>
 
 
-    <!-- Content -->
     <div class="body-content-div">
+
 
 
         <!-- Items box -->
         <div class="body-content-items-div">
-    
-            
-            <!-- Table for entities data -->
-            <table class="table table-hover">
-                <tbody id="table">
 
-                </tbody>
-            </table>
+            <!-- Div for 3 options -->
+            <div id="body-content-items-orders" class="body-content-items-orders">
 
 
-            
-          
+                <!-- Div the items -->
+                <div id="items-content" class="items-content">
+
+
+                    <!-- Div the left items -->
+                    <div class="items-content__left">
+
+                        <div class="group-content">
+                            <h2>Orders</h2>
+
+                            <div id="items-container" class="items">
+
+                                <div class="providers">
+
+
+                                    <h2>Roberto</h2>
+
+
+
+                                    <h4>Barcelona - Third - 23/24</h4>
+
+
+                                </div>
+
+                            </div>
+
+                        
+                        </div>
+
+                    </div>
+
+                    <!-- Vertical line div -->
+                    <div class="d-flex" style="height: 450px;">
+                        <div class="vr"></div>
+                    </div>
+
+                    <!-- Div the right items -->
+                    <div class="items-content__right">
+
+                        <div class="group-content">
+
+
+                            <div id="items-right-container" class="items-review">
+
+
+                                
+
+
+                                <div class="items-review__info">
+                                    <h4>Provider:</h4>
+                                    <h2 id="provider">XX</h2>
+                                </div>
+
+
+                                <div class="items-review__info">
+                                    <h4>Quantity of shirts:</h4>
+                                    <h2 id="shirtsQuantity">XX</h2>
+                                </div>
+
+
+                                <div class="items-review__info">
+                                    <h4>Total:</h4>
+                                    <h2 id="costValue">XXXXX</h2>
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="btn-div">
+
+                <button id="btn-create" class="btn-add" onclick="createOrders()">View Order</button>
+
+                
+            </div>
 
 
         </div>
-        
+
 
     </div>
 
-    
 
-    <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous">
-    </script>
+
 
 </body>
+
 </html>
