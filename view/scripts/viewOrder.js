@@ -2,6 +2,7 @@
 
 
 let Values = []
+let shirtsQuantity;
 let tab = ``;
 const url = "http://localhost:8080/"
 
@@ -62,6 +63,28 @@ function loadUpOrder(data) {
 
     container.innerHTML = tab;
 
+    
+    
+    //Function to set each EventListener at the buttons
+    const items = document.getElementsByClassName("providers");
+
+    for (let i of items){
+        i.addEventListener("click", async function(){
+            const orderIdNumber = i.querySelector("h4").id.split("-")[1]
+
+            const dataId = await getApi(url + "orders/"+ orderIdNumber)
+            shirtsQuantity = await getApi(url + "orderItem/orders/" + orderIdNumber) 
+
+            Values = dataId;
+
+
+            loadUpDetails();
+            
+        })
+
+
+    }
+
 
 }
 
@@ -76,20 +99,33 @@ async function getData(){
 
     loadUpOrder(data);
 
+
+
+
 }
 
 //--------------Function to set details of the main order--------------
 function loadUpDetails() {
+
+    const rightContent = document.getElementById("right-content")
+    const verticalLine = document.getElementById("vertical-line")
+
+    const IS_CONTENT_HIDDEN = rightContent.style.display === "none";
+    
+    if(IS_CONTENT_HIDDEN) {
+        rightContent.style.display = "block"
+        verticalLine.style.display = "block"
+    }
+
     const statusValue = document.getElementById("statusValue");
     const shirtsText = document.getElementById("shirtsQuantity");
     const providerText = document.getElementById("provider");
  
 
 
-
-    statusValue.textContent = "R$ " + Values.profit
-    providerText.textContent = SelectedList[0].provider;
-    shirtsText.textContent = SelectedList.length;
+    statusValue.textContent = Values.status
+    providerText.textContent = Values.provider_id.name;
+    shirtsText.textContent = shirtsQuantity.length;
 
 
 }
