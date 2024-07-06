@@ -1,6 +1,7 @@
 package com.arthursouza.swiftflowMVP.controllers.Relations;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import com.arthursouza.swiftflowMVP.models.Relations.OrderItem;
 import com.arthursouza.swiftflowMVP.models.dto.OrderItemDTO.OrderItemCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.OrderItemDTO.OrderItemUpdateDTO;
 import com.arthursouza.swiftflowMVP.services.Relations.OrderItemService;
+import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -45,6 +47,16 @@ public class OrderItemController {
         OrderItem orderItem = this.orderItemService.findLastOrder();
 
         return ResponseEntity.ok().body(orderItem);
+
+    }
+
+
+    @GetMapping("/orders/{id}")
+    public ResponseEntity<List<OrderItem>> findOrderItemsById(@Valid @PathVariable Long id){
+        List<OrderItem> orderItems = this.orderItemService.findOrderItemsById(id);
+
+        return ResponseEntity.ok().body(orderItems);
+
 
     }
 

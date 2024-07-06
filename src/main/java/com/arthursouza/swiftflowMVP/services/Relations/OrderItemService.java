@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.services.Relations;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,21 @@ public class OrderItemService {
     }
 
 
+    public List<OrderItem> findOrderItemsById(Long id){
+        List<OrderItem> orderItems = this.orderItemRepository.findOrderItemsById(id);
+
+        if (orderItems.isEmpty()) {
+            throw new ObjectNotFoundException(
+                "This ID doesn't match any Order. Id: " + id + " Type: "+ OrderItem.class.getName());
+            
+        }
+
+        return orderItems;
+
+
+    }
+
+
     //CRUD METHODS
     @Transactional
     public OrderItem create(OrderItem orderItem){
@@ -47,7 +63,8 @@ public class OrderItemService {
 
         return orderItem;
     }
-
+    
+    @Transactional
     public OrderItem update(OrderItem orderItem){
         OrderItem newObj = findById(orderItem.getId());
 
@@ -59,6 +76,7 @@ public class OrderItemService {
 
     }
 
+    @Transactional
     public void delete(Long id){
         OrderItem obj = findById(id);
 
