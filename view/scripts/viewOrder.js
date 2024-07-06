@@ -48,7 +48,7 @@ function loadUpOrder(data) {
         </div>
 
         `
-    } 
+    }
 
 
 
@@ -63,23 +63,23 @@ function loadUpOrder(data) {
 
     container.innerHTML = tab;
 
-    
-    
+
+
     //Function to set each EventListener at the buttons
     const items = document.getElementsByClassName("providers");
 
-    for (let i of items){
-        i.addEventListener("click", async function(){
+    for (let i of items) {
+        i.addEventListener("click", async function () {
             const orderIdNumber = i.querySelector("h4").id.split("-")[1]
 
-            const dataId = await getApi(url + "orders/"+ orderIdNumber)
-            shirtsQuantity = await getApi(url + "orderItem/orders/" + orderIdNumber) 
+            const dataId = await getApi(url + "orders/" + orderIdNumber)
+            shirtsQuantity = await getApi(url + "orderItem/orders/" + orderIdNumber)
 
             Values = dataId;
 
 
             loadUpDetails();
-            
+
         })
 
 
@@ -91,7 +91,7 @@ function loadUpOrder(data) {
 
 
 
-async function getData(){
+async function getData() {
 
     const urlOrder = url + "orders"
 
@@ -107,20 +107,27 @@ async function getData(){
 //--------------Function to set details of the main order--------------
 function loadUpDetails() {
 
-    const rightContent = document.getElementById("right-content")
-    const verticalLine = document.getElementById("vertical-line")
 
-    const IS_CONTENT_HIDDEN = rightContent.style.display === "none";
-    
-    if(IS_CONTENT_HIDDEN) {
-        rightContent.style.display = "block"
-        verticalLine.style.display = "block"
+    function showInfo() {
+        const rightContent = document.getElementById("right-content")
+        const verticalLine = document.getElementById("vertical-line")
+        const viewOrderBtn = document.getElementById("btn-view")
+
+        const IS_CONTENT_HIDDEN = rightContent.style.display === "none";
+
+        if (IS_CONTENT_HIDDEN) {
+            rightContent.style.display = "block"
+            verticalLine.style.display = "block"
+            viewOrderBtn.style.display = ""
+        }
     }
+
+    showInfo();
 
     const statusValue = document.getElementById("statusValue");
     const shirtsText = document.getElementById("shirtsQuantity");
     const providerText = document.getElementById("provider");
- 
+
 
 
     statusValue.textContent = Values.status
@@ -129,6 +136,16 @@ function loadUpDetails() {
 
 
 }
+
+
+function viewOrder(){
+
+    //!Redirect to OrderItem HTML
+
+}
+
+
+
 
 
 
