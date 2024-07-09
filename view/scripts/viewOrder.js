@@ -47,7 +47,7 @@ function show(data) {
                     console.log("Column::: ", value[column])
 
                     
-                    function getColumn(value, column) {
+                    function getColumn(value, column) { // Checks if the response is valid or not
 
                         if (value[column].provider_id && value[column].shirt_id && value[column].shirt_id.team_id && value[column].shirt_id.team_id.name) {
                             return value[column].shirt_id.team_id.name
@@ -191,7 +191,7 @@ function loadUpOrder(data) {
 
 
 
-
+//--------------Functions to get orders data--------------
 async function getData() {
 
     const urlOrder = url + "orders"
@@ -208,7 +208,7 @@ async function getData() {
 //--------------Function to set details of the main order--------------
 function loadUpDetails() {
 
-
+    //--------------Functions to show and hide info when clicked--------------
     function showInfo() {
         const rightContent = document.getElementById("right-content")
         const verticalLine = document.getElementById("vertical-line")
@@ -239,6 +239,8 @@ function loadUpDetails() {
 }
 
 
+
+//--------------Functions to push viewOrderItem data and populate at div--------------
 function viewOrder() {
 
 
@@ -267,7 +269,7 @@ function viewOrder() {
 
 }
 
-
+//--------------Functions to set ?id at paths--------------
 async function fetchData(id) {
 
     const urlOrderItem = url + "orderItem/orders/" + id

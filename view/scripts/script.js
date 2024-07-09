@@ -474,7 +474,7 @@ btnViewOrder.addEventListener("click", function(){
 
 
 
-
+//--------------Functions to get all the modal values and return through JSON--------------
 function GetModalValues(){
 
     let div = document.getElementById("modal-body")
