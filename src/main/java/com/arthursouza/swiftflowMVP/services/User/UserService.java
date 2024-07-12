@@ -1,13 +1,17 @@
 package com.arthursouza.swiftflowMVP.services.User;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.arthursouza.swiftflowMVP.models.User.User;
 import com.arthursouza.swiftflowMVP.models.dto.UserDTO.UserCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.UserDTO.UserUpdateDTO;
+import com.arthursouza.swiftflowMVP.models.enums.ProfileEnum;
 import com.arthursouza.swiftflowMVP.repositories.User.UserRepository;
 import com.arthursouza.swiftflowMVP.services.exceptions.DataBindingViolationException;
 import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
@@ -19,6 +23,9 @@ public class UserService {
     
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     public User findById(Long id){
@@ -33,6 +40,8 @@ public class UserService {
 
     public User create(User user){
         user.setId(null);
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setProfiles(Stream.of(ProfileEnum.USER.getCode()).collect(Collectors.toSet()));
         user = this.userRepository.save(user);
 
         return user;
@@ -42,7 +51,8 @@ public class UserService {
     public User update(User user){
         User newUser = this.findById(user.getId());
 
-        newUser.setPassword(user.getPassword());
+        newUser.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+      
 
         return this.userRepository.save(newUser);
 
