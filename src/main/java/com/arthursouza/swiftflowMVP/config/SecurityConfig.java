@@ -19,10 +19,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.arthursouza.swiftflowMVP.security.JWTUtil;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
 
     private AuthenticationManager authenticationManager;
