@@ -13,7 +13,7 @@ public enum ProfileEnum {
     USER(2, "ROLE_USER");
 
     private int code;
-    private String decription;
+    private String description;
 
     public static ProfileEnum toEnum(Integer code) {
 
