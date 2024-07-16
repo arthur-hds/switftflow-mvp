@@ -36,7 +36,7 @@ public class JWTUtil {
     }
 
 
-
+    //a token is built, along with its data being passed on
     public String generateToken(String username){
 
         SecretKey key = getKeyBySecret();
@@ -51,6 +51,9 @@ public class JWTUtil {
 
 
     //Gets information of the created token
+
+    //Method used to retrieve information from a token, via key and token. 
+	//This information is used to be able to identify and validate the data in the future
     private Claims getClaims(String token){
         
         SecretKey key = getKeyBySecret();
@@ -68,6 +71,9 @@ public class JWTUtil {
 
 
     //Use information of the token to validate it
+
+    //Method used to validate the token's main data 
+    //(User name, whether the expiration date has passed, etc.) 
     public boolean isValidToken(String token){
         Claims claims = getClaims(token);
 
