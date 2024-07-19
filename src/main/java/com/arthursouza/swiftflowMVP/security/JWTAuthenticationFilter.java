@@ -1,5 +1,6 @@
 package com.arthursouza.swiftflowMVP.security;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +13,6 @@ import com.arthursouza.swiftflowMVP.exceptions.GlobalExceptionHandler;
 import com.arthursouza.swiftflowMVP.models.User.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,9 +22,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
     
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    JWTUtil jwtUtil;
+    private JWTUtil jwtUtil;
 
     
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil){

@@ -21,6 +21,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.arthursouza.swiftflowMVP.security.JWTAuthenticationFilter;
+import com.arthursouza.swiftflowMVP.security.JWTAuthorizationFilter;
 import com.arthursouza.swiftflowMVP.security.JWTUtil;
 
 @Configuration
@@ -83,7 +84,7 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilter(new JWTAuthenticationFilter(this.authenticationManager, this.jwtUtil));
-
+        http.addFilter(new JWTAuthorizationFilter(this.authenticationManager, this.jwtUtil, this.userDetailsService));
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
