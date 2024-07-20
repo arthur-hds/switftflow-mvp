@@ -1,14 +1,22 @@
 package com.arthursouza.swiftflowMVP.services.User;
 
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.arthursouza.swiftflowMVP.models.User.User;
 import com.arthursouza.swiftflowMVP.models.dto.UserDTO.UserCreateDTO;
 import com.arthursouza.swiftflowMVP.models.dto.UserDTO.UserUpdateDTO;
+import com.arthursouza.swiftflowMVP.models.enums.ProfileEnum;
 import com.arthursouza.swiftflowMVP.repositories.User.UserRepository;
+import com.arthursouza.swiftflowMVP.security.UserSpringSecurity;
+import com.arthursouza.swiftflowMVP.services.exceptions.AuthorizationException;
 import com.arthursouza.swiftflowMVP.services.exceptions.DataBindingViolationException;
 import com.arthursouza.swiftflowMVP.services.exceptions.ObjectNotFoundException;
 
@@ -20,8 +28,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public User findById(Long id){
+        UserSpringSecurity userSpringSecurity = authenticated();
+        if(!Objects.nonNull(userSpringSecurity)){
+            throw new AuthorizationException("User Denied");
+        }
+
         Optional<User> user = this.userRepository.findById(id);
 
         return user.orElseThrow(() -> new ObjectNotFoundException(
@@ -33,6 +49,8 @@ public class UserService {
 
     public User create(User user){
         user.setId(null);
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setProfiles(Stream.of(ProfileEnum.USER.getCode()).collect(Collectors.toSet()));
         user = this.userRepository.save(user);
 
         return user;
@@ -42,7 +60,8 @@ public class UserService {
     public User update(User user){
         User newUser = this.findById(user.getId());
 
-        newUser.setPassword(user.getPassword());
+        newUser.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+      
 
         return this.userRepository.save(newUser);
 
@@ -79,6 +98,17 @@ public class UserService {
         user.setPassword(obj.getPassword());
 
         return user;
+    }
+
+
+    public static UserSpringSecurity authenticated(){
+
+        try {
+            return (UserSpringSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
 }
