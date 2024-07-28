@@ -5,6 +5,18 @@ let CurrentColumn = ""
 let CurrentColumnOrigin = ""
 
 
+async function loadUsername(){
+
+    const data = await getAPI(url+"user/1");
+
+    const username = data.username;
+
+    const userMessage = document.getElementById("user-message");
+
+    userMessage.textContent = username+"!";
+
+}
+
 
 //--------------Functions to get and set data at table--------------
 function show(data) {
@@ -570,7 +582,7 @@ function changeWindow(page) {
 }
 
 
-
+loadUsername();
 
 
 
