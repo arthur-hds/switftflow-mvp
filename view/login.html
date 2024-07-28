@@ -48,13 +48,13 @@
 
                     <label for="userInput">User:</label>
                     <br>
-                    <input type="text" name="userInput">
+                    <input type="text" id="user" name="userInput" required="true">
 
                     <br>
 
                     <label for="passwordInput">Password:</label>
                     <br>
-                    <input type="text" name="passwordInput">
+                    <input type="password" id="password" name="passwordInput" required="true">
 
 
                 </form>
@@ -63,8 +63,9 @@
 
 
 
-            <div class="headers-arrow__icon login-arrow" onclick="changeWindow('index')">
-                <i class="bi bi-arrow-right"></i>
+            <div class="headers-arrow__icon login-arrow">
+                
+                <i class="bi bi-arrow-right" onclick="login()"></i>
 
             </div>
 
