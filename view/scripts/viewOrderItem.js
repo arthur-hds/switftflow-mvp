@@ -1,4 +1,6 @@
+//--------------Global Variables--------------
 const url = "http://localhost:8080/"
+const token = window.localStorage.getItem("Authorization");
 let CurrentColumn = ""
 let CurrentColumnOrigin = ""
 
@@ -88,7 +90,11 @@ function show(data){
 async function getAPI(url){
 
     const response = await fetch(url, {     // Gets the response body
-        method: "GET"});     
+        method: "GET", 
+        headers: new Headers({
+            Authorization: token,
+        })
+    });     
 
     
     const data = await response.json();  

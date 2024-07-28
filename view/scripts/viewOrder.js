@@ -1,6 +1,6 @@
 //--------------Global Variables--------------
 
-
+const token = window.localStorage.getItem("Authorization");
 let Values = []
 let shirtsQuantity;
 let orderIdNumber;
@@ -113,7 +113,10 @@ function show(data) {
 //--------------Function to get the JSON data--------------
 async function getApi(url) {
     const response = await fetch(url, {
-        method: "GET"
+        method: "GET",
+        headers: new Headers({
+            Authorization: token,
+        })
     })
 
     const data = await response.json();

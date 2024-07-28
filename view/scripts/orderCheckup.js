@@ -1,5 +1,6 @@
 //--------------Global Variables--------------
 
+const token = window.localStorage.getItem("Authorization");
 let SelectedList = [];
 let ClientsList = [];
 let Values = []
@@ -11,7 +12,10 @@ let tab = ``;
 //--------------Function to get the JSON data--------------
 async function getApi(url) {
     const response = await fetch(url, {
-        method: "GET"
+        method: "GET",
+        headers: new Headers({
+            Authorization: token,
+        })
     })
 
     const data = await response.json();
@@ -119,7 +123,8 @@ async function createOrder() {
 
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": token,
             },
             body: JSON.stringify(AllParams)
 

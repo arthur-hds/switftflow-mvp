@@ -1,5 +1,6 @@
 //--------------Global Variables--------------
 
+const token = window.localStorage.getItem("Authorization");
 let SelectedList = [];
 let nameList = [];
 let Values = {
@@ -17,7 +18,10 @@ let tab = ``;
 //--------------Function to get the JSON data--------------
 async function getApi(url) {
     const response = await fetch(url, {
-        method: "GET"
+        method: "GET", 
+        headers: new Headers({
+            Authorization: token,
+        })
     })
 
     const data = await response.json();
@@ -28,7 +32,7 @@ async function getApi(url) {
 //--------------Function to change HTML when back arrow pressed--------------
 function changeWindow(page) {
 
-    
+
     window.location.href = `${page}.html`;
 }
 
@@ -171,7 +175,7 @@ async function moveToSelected(row, url) {
 
             shirtJSON = {
                 "client": order_client.tittle,
-                "orderClientID": order_client.id ,
+                "orderClientID": order_client.id,
                 "team": i.shirt_id.team_id.name,
                 "type": i.shirt_id.type,
                 "season": i.shirt_id.season,
@@ -210,14 +214,14 @@ async function moveToSelected(row, url) {
         priceSum += i.price;
         profitSum += i.revenue;
 
-        if (nameList.length === 0){  //Identifies unique values of the clients at all orders
+        if (nameList.length === 0) {  //Identifies unique values of the clients at all orders
             nameList.push(i.client)
-        } else if (!nameList.includes(i.client)){ 
+        } else if (!nameList.includes(i.client)) {
             nameList.push(i.client)
-            
+
         }
 
-   
+
 
     }
 
@@ -285,7 +289,7 @@ async function loadUpOptions() {
 
 
 //--------------Function that checks if the minimum required shirts have been selected--------------
-function checkQuantity(){
+function checkQuantity() {
 
     const selectedShirts = document.getElementById("item-selected-info");
     const miniumShirts = document.getElementById("item-minimum-info")
@@ -296,12 +300,12 @@ function checkQuantity(){
     const IsMinimum = selected < minimum
 
 
-    function updateRemainingText(){
+    function updateRemainingText() {
 
         const remaining = minimum - selected;
 
 
-        
+
         const remainingText = document.getElementById("remaining-text");
         remainingText.innerText = remaining;
 
@@ -309,21 +313,21 @@ function checkQuantity(){
 
 
 
-    if( IsMinimum ){
+    if (IsMinimum) {
         updateRemainingText()
         showModal();
         return;
     }
 
-    
+
     sendData();
-    
+
 
 
 }
 
 //--------------Function to save all selected items to be used at the review page--------------
-function sendData(){
+function sendData() {
 
     sessionStorage.setItem("Orders", JSON.stringify(SelectedList));
     sessionStorage.setItem("Clients", JSON.stringify(nameList));
@@ -335,16 +339,16 @@ function sendData(){
 
 
 
-function showModal(){
+function showModal() {
 
     const modal = document.getElementById("error-modal");
- 
 
-    if(modal.style.display === "block"){
+
+    if (modal.style.display === "block") {
 
         modal.style.display = "none";
 
-    }else if(modal.style.display === "none" || modal.style.display === ""){
+    } else if (modal.style.display === "none" || modal.style.display === "") {
 
         modal.style.display = "block";
 
