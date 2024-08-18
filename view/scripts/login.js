@@ -38,8 +38,26 @@ async function loginApi(username, password){
 }
 
 
+
+//--------------Function that verifies if the user are already logged in--------------
+function alreadyLogged(){
+
+    const IS_USER_LOGGED = window.localStorage.getItem("Authorization");
+
+    if(IS_USER_LOGGED){
+        changeWindow("index");
+    }
+
+
+}
+
+
+
 //--------------Function to change HTML when back arrow pressed--------------
 function changeWindow(page) {
 
     window.location.href = `${page}.html`;
 }
+
+
+alreadyLogged()
