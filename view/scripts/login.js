@@ -38,7 +38,9 @@ async function loginApi(username, password){
         console.log(response)
         
         if(!response.ok){
+            showModal();
             throw new Error("User or password is incorrect");
+            
         }
 
         return response;
@@ -73,6 +75,23 @@ function alreadyLogged(){
 function changeWindow(page) {
 
     window.location.href = `${page}.html`;
+}
+
+
+function showModal() {
+
+    const modal = document.getElementById("error-modal");
+
+
+    if (modal.style.display === "block") {
+
+        modal.style.display = "none";
+
+    } else if (modal.style.display === "none" || modal.style.display === "") {
+
+        modal.style.display = "block";
+
+    }
 }
 
 
