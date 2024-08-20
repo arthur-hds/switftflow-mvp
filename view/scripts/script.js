@@ -7,6 +7,8 @@ let CurrentColumnOrigin = ""
 
 async function loadUsername(){
 
+    alreadyLogged();
+
     const data = await getAPI(url+"user/1");
 
     const username = data.username;
@@ -17,6 +19,20 @@ async function loadUsername(){
 
 }
 
+//--------------Function that verifies if the user are already logged in--------------
+function alreadyLogged(){
+
+    const IS_USER_LOGGED = window.localStorage.getItem("Authorization");
+
+    if(!IS_USER_LOGGED){
+        changeWindow("login");
+    }
+
+
+
+
+
+}
 
 //--------------Functions to get and set data at table--------------
 function show(data) {
