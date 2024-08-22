@@ -77,7 +77,7 @@ async function alreadyLogged(){
         });
     
         if (response.ok) {
-            IS_TOKEN_VALID = true;  // Define como true apenas se a resposta for bem-sucedida
+            IS_TOKEN_VALID = true; 
         } else {
             console.error("Authorization token is invalid! -", response.status);
         }

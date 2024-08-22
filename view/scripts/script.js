@@ -20,16 +20,38 @@ async function loadUsername(){
 }
 
 //--------------Function that verifies if the user are already logged in--------------
-function alreadyLogged(){
+async function alreadyLogged(){
+    
 
-    const IS_USER_LOGGED = window.localStorage.getItem("Authorization");
 
-    if(!IS_USER_LOGGED){
+    const token = window.localStorage.getItem("Authorization");
+
+    const IS_USER_LOGGED = token;
+
+    let IS_TOKEN_VALID = false;
+
+    try {
+        const response = await fetch(url + "client", {
+            method: "GET",
+            headers: new Headers({
+                Authorization: token,
+            }),
+        });
+    
+        if (response.ok) {
+            IS_TOKEN_VALID = true;  // Define como true apenas se a resposta for bem-sucedida
+        } else {
+            console.error("Authorization token is invalid! -", response.status);
+        }
+    
+    } catch (error) {
+        console.error("Error fetching the data! -", error);
+    }
+    
+
+    if(!IS_USER_LOGGED || !IS_TOKEN_VALID){
         changeWindow("login");
     }
-
-
-
 
 
 }
