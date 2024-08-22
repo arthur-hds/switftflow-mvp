@@ -233,8 +233,13 @@ function loadUpDetails() {
     const providerText = document.getElementById("provider");
 
 
+    const statusValueDirective = {
+        true: "Chegou",
+        false: "Não chegou"
+    }
 
-    statusValue.textContent = Values.status
+
+    statusValue.textContent = statusValueDirective[Values.status]
     providerText.textContent = Values.provider_id.name;
     shirtsText.textContent = shirtsQuantity.length;
 
