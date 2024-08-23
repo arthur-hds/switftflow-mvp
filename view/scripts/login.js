@@ -38,7 +38,7 @@ async function loginApi(username, password){
         console.log(response)
         
         if(!response.ok){
-            showModal();
+            showModal("invalidCredentials");
             throw new Error("User or password is incorrect");
             
         }
@@ -80,6 +80,7 @@ async function alreadyLogged(){
             IS_TOKEN_VALID = true; 
         } else {
             console.error("Authorization token is invalid! -", response.status);
+            showModal("invalidToken");
         }
     
     } catch (error) {
@@ -104,9 +105,20 @@ function changeWindow(page) {
 }
 
 
-function showModal() {
+function showModal(error) {
 
     const modal = document.getElementById("error-modal");
+    let modalError = document.getElementById("content-modal");
+
+
+    const errorMessage = {
+        "invalidCredentials": `<strong>Username</strong> or <strong>password</strong> are wrong or doesn't exist`,
+        "invalidToken": `Current <strong>token</strong> is invalid or expired!`
+    }
+
+
+    modalError.innerHTML = errorMessage[error];
+
 
 
     if (modal.style.display === "block") {
