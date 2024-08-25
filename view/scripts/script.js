@@ -130,6 +130,7 @@ function show(data) {
         let tab = `<i class="bi bi-emoji-dizzy" style="font-size: 10rem; color: #5f4d8a;"></i>`;
         tab += `<h2 style="color: #5f4d8a;"> There is no data avaiable here... </h2>`
 
+        document.getElementById("table").innerHTML = '';  //Clears the table div
         document.getElementById("items-content").innerHTML = tab;  //Adds the following error alert content
 
 
