@@ -1,7 +1,7 @@
 //Global variables
 const url = "http://localhost:8080/"
 const token = window.localStorage.getItem("Authorization");
-let CurrentColumn = ""
+let CurrentColumn = "client"
 let CurrentColumnOrigin = ""
 
 
@@ -621,6 +621,7 @@ function changeWindow(page) {
 
 
 loadUsername();
+ChangeData(CurrentColumn); // Gets data the first time the user accesses the page
 
 
 
